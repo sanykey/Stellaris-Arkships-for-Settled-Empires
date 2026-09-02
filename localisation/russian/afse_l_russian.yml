@@ -1,0 +1,6 @@
+﻿l_russian:
+ afse_settle_keep_arkships: "Мы обретём здесь дом, но наши ковчеги продолжат путь."
+ afse_settle_keep_arkships_tt: "\nВсе остальные §Yковчеги§! останутся под нашим непосредственным управлением."
+ afse_settled_arkship_empire_size: "Оседлые ковчеги"
+ afse_settled_arkship_empire_size_desc: "Ковчеги и их районы сохраняют повышенную административную нагрузку кочевых колоний."
+ afse_settled_arkship_empire_size_breakdown: "Дополнительный размер империи: §Y+[Root.afse_settled_arkship_empire_size_total]§!\n$t$От §Y[Root.afse_settled_arkship_count]§! ковчегов: §Y+[Root.afse_settled_arkship_colony_empire_size_total]§!\n$t$От §Y[Root.afse_settled_arkship_district_count]§! районов ковчегов: §Y+[Root.afse_settled_arkship_district_empire_size_total]§!\n\nУчтены возвышение колоний и уменьшения размера империи от колоний и районов."

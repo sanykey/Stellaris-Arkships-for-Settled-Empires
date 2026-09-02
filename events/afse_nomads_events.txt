@@ -1,0 +1,286 @@
+namespace = afse
+
+country_event = {
+	id = afse.21
+	title = nomads.4705.name
+
+	desc = {	# Regular empire
+		text = nomads.4705.desc.regular
+		trigger = {
+			NOR = {
+				is_hive_empire = yes
+				is_machine_empire = yes
+				has_origin = origin_forever_cruise
+			}
+		}
+	}
+
+	desc = { 	# Machine Intelligence
+		text = nomads.4705.desc.machine
+		trigger = {
+			is_machine_empire = yes
+			NOT = { has_origin = origin_forever_cruise }
+		}
+	}
+
+	desc = { 	# Hive Mind
+		text = nomads.4705.desc.hive
+		trigger = {
+			is_hive_empire = yes
+			NOT = { has_origin = origin_forever_cruise }
+		}
+	}
+
+	desc = {	# Regular empire Forever Cruise
+		text = nomads.1010.regular.desc
+		trigger = {
+			NOR = {
+				is_hive_empire = yes
+				is_machine_empire = yes
+			}
+			has_origin = origin_forever_cruise
+		}
+	}
+
+	desc = {	# Hive Mind Forever Cruise
+		text = nomads.1010.hive.desc
+		trigger = {
+			is_hive_empire = yes
+			has_origin = origin_forever_cruise
+		}
+	}
+
+	desc = {	# Machine Intelligence Forever Cruise
+		text = nomads.1010.machine.desc
+		trigger = {
+			is_machine_empire = yes
+			has_origin = origin_forever_cruise
+		}
+	}
+
+	inline_script = {
+		script = events/biogenesis_event_art
+		OWNER = owner
+		REGULAR_PICTURE = GFX_evt_big_landing_ship
+		BIOSHIP_PICTURE = GFX_evt_bioship_landing
+	}
+
+	location = from
+	is_triggered_only = yes
+
+	# We only have one Arkship, and thus we Settle.
+	option = {
+		exclusive_trigger = {
+			count_owned_ship = {
+				count = 1
+				limit = { is_arkship_ship = yes }
+			}
+		}
+		name = nomads.4700.a
+		custom_tooltip = nomads.4700.settle.tt
+		arkship_settle_planet_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+			SETTLING_ARKSHIP = event_target:settling_arkship
+			SETTLED_PLANET = event_target:settled_planet
+			SETTLED_SYSTEM = event_target:settled_system
+		}
+		convert_waystations_into_outposts_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+		}
+		convert_logistic_ships_into_construction_ships_effects = yes
+		custom_tooltip = convert_waystations_into_outposts_tt
+		custom_tooltip = convert_logistics_to_construction_tt
+	}
+
+	# We have many Arkships, we Settle and retain direct control of the others.
+	option = {
+		trigger = {
+			count_owned_ship = {
+				count > 1
+				limit = { is_arkship_ship = yes }
+			}
+			OR = {
+				has_tradition = tr_adaptability_finish
+				has_tradition = tr_versatility_finish
+			}
+		}
+		name = afse_settle_keep_arkships
+		custom_tooltip = nomads.4700.settle.tt
+		arkship_settle_planet_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+			SETTLING_ARKSHIP = event_target:settling_arkship
+			SETTLED_PLANET = event_target:settled_planet
+			SETTLED_SYSTEM = event_target:settled_system
+		}
+		convert_waystations_into_outposts_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+		}
+		custom_tooltip = afse_settle_keep_arkships_tt
+		custom_tooltip = convert_waystations_into_outposts_tt
+	}
+
+	# We have many Arkships, we Settle and scuttle them.
+	option = {
+		name = nomads.4700.b
+		custom_tooltip = nomads.4700.settle.tt
+		arkship_settle_planet_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+			SETTLING_ARKSHIP = event_target:settling_arkship
+			SETTLED_PLANET = event_target:settled_planet
+			SETTLED_SYSTEM = event_target:settled_system
+		}
+		convert_waystations_into_outposts_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+		}
+		settlement_scuttle_arkships_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+			SETTLED_PLANET = event_target:settled_planet
+			SETTLING_ARKSHIP = event_target:settling_arkship
+		}
+		convert_logistic_ships_into_construction_ships_effects = yes
+		custom_tooltip = settlement_scuttle_arkships_effect_tt
+		custom_tooltip = convert_waystations_into_outposts_tt
+		custom_tooltip = convert_logistics_to_construction_tt
+	}
+
+	# We have many Arkships, we stay Nomadic and release a Settled Subject.
+	option = {
+		trigger = {		# You need to be able to release a subject to have this option
+			is_homicidal = no
+			OR = {
+				is_gestalt = no
+				has_origin = origin_progenitor_hive
+			}
+		}
+		name = nomads.4700.c
+		custom_tooltip = nomads.4700.settle_subject.tt
+		create_settlement_subject_country_effect = {
+			NOMAD_COUNTRY = event_target:player_country
+		}
+		tooltip = {
+			event_target:settled_planet = {
+				add_modifier = {
+					modifier = arkship_parts
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = event_target:subject_country
+			}
+			arkship_settle_planet_effect = {
+				SETTLING_COUNTRY = event_target:subject_country
+				SETTLING_ARKSHIP = event_target:settling_arkship
+				SETTLED_PLANET = event_target:settled_planet
+				SETTLED_SYSTEM = event_target:settled_system
+			}
+			hidden_effect = {
+				give_planet_and_system_to_rebel = {
+					PLANET = event_target:settled_planet
+					REBEL = event_target:subject_country
+					OLD_OWNER = event_target:player_country
+				}
+			}
+			event_target:subject_country? = {
+				clean_up_settlement_subject_country_effect = {
+					OVERLORD = event_target:player_country
+				}
+				set_origin_effect = { SOURCE_COUNTRY = event_target:player_country }
+				if = {
+					limit = {
+						has_origin = origin_default
+					}
+					set_origin = origin_nomadic_settled
+				}
+			}
+			create_outposts_in_waystation_systems_effect = {
+				NOMAD_COUNTRY = event_target:player_country
+				SETTLING_COUNTRY = event_target:subject_country
+				SETTLED_SYSTEM = event_target:settled_system
+				RANGE = @arkship_subject_settle_outpost_range
+			}
+		}
+		custom_tooltip = create_outposts_in_waystation_systems_for_subject_tt
+		# We keep our logistic ships as we stay Nomadic
+	}
+
+	# We have many Arkships, we Settle and release a Nomadic Subject.
+	option = {
+		trigger = {		# You need to be able to release a subject to have this option
+			is_homicidal = no
+			OR = {
+				is_gestalt = no
+				has_origin = origin_progenitor_hive
+			}
+		}
+		name = nomads.4700.d
+		custom_tooltip = nomads.4700.settle.tt
+		create_settlement_subject_country_effect = {
+			NOMAD_COUNTRY = event_target:player_country
+		}
+		arkship_settle_planet_effect = {
+			SETTLING_COUNTRY = event_target:player_country
+			SETTLING_ARKSHIP = event_target:settling_arkship
+			SETTLED_PLANET = event_target:settled_planet
+			SETTLED_SYSTEM = event_target:settled_system
+		}
+		if = {
+			limit = {
+				exists = event_target:subject_country
+			}
+			nomad_give_arkships_to_subject_effect = {
+				NOMAD_COUNTRY = event_target:subject_country
+				SETTLING_ARKSHIP = event_target:settling_arkship
+			}
+			event_target:subject_country? = {
+				set_country_as_nomad_effect = { IS_NOMAD = yes }
+				set_faction_properties = {
+					needs_border_access = no
+				}
+				set_resource_converter = nomadic_operational_reserves
+				clean_up_settlement_subject_country_effect = {
+					OVERLORD = event_target:player_country
+				}
+				set_origin_effect = { SOURCE_COUNTRY = event_target:player_country }
+				if = {
+					limit = {
+						has_origin = origin_default
+					}
+					set_origin = origin_nomadic_subject
+				}
+			}
+			create_outposts_in_waystation_systems_effect = {
+				NOMAD_COUNTRY = event_target:player_country
+				SETTLING_COUNTRY = event_target:player_country
+				SETTLED_SYSTEM = event_target:settled_system
+				RANGE = @arkship_subject_settle_outpost_range
+			}
+			nomad_give_waystations_to_subject_effect = {
+				NOMAD_COUNTRY = event_target:subject_country
+				SETTLING_COUNTRY = event_target:player_country
+			}
+			nomad_give_logistic_ships_to_subject_effect = {
+				NOMAD_COUNTRY = event_target:subject_country
+				SETTLING_COUNTRY = event_target:player_country
+			}
+		}
+		custom_tooltip = create_outposts_in_waystation_systems_for_overlord_tt
+		custom_tooltip = make_subject_nomadic_tt
+	}
+
+	after = {
+		hidden_effect = {
+			if = {
+				limit = { has_origin = origin_forever_cruise }
+				remove_forever_cruise_citizenships = yes
+				set_country_flag = forever_cruise_over
+				random_situation = {
+					limit = { is_situation_type = situation_passenger_satisfaction }
+					destroy_situation = this
+				}
+				save_event_target_as = this_country
+				country_event = { id = timeline.115 }
+			}
+		}
+	}
+}

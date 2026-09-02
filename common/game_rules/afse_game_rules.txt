@@ -1,0 +1,50 @@
+can_nomad_settle = {
+	hidden_trigger = {
+		root = {
+			OR = {
+				is_nomadic = yes
+				AND = {
+					is_nomadic = no
+					OR = {
+						has_tradition = tr_adaptability_finish
+						has_tradition = tr_versatility_finish
+					}
+				}
+			}
+		}
+	}
+	custom_tooltip = {
+		fail_text = "SETTLE_BLOCKED_BY_ORIGIN"
+		root = {
+			NOR = {
+				has_origin = origin_sacred_path
+				has_origin = origin_heirs_of_the_khan
+				AND = {
+					has_origin = origin_forever_cruise
+					NOT = {
+						has_country_flag = forever_cruise_planetfall
+					}
+				}
+			}
+		}
+	}
+
+	custom_tooltip = {
+		fail_text = "SETTLE_MISSING_TRADITION"
+		if = {
+			limit = {
+				root = {
+					NOR = {
+						has_origin = origin_forever_cruise
+						has_origin = origin_sacred_path
+						has_origin = origin_heirs_of_the_khan
+					}
+				}
+			}
+			OR = {
+				root = { has_tradition = tr_adaptability_finish }
+				root = { has_tradition = tr_versatility_finish }
+			}
+		}
+	}
+}

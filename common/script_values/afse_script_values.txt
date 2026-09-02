@@ -1,0 +1,57 @@
+# Colony scope: number of built districts on this Arkship.
+afse_arkship_district_count = {
+	base = 0
+	complex_trigger_modifier = {
+		trigger = num_districts
+		parameters = { type = any }
+		mode = add
+	}
+}
+
+# Colony scope: additional contribution from the Arkship itself.
+afse_settled_arkship_colony_empire_size = {
+	base = 20
+	mult = value:afse_colony_ascension_empire_size_factor
+	mult = owner.value:scripted_modifier_mult|MODIFIER|empire_size_colonies_mult|
+}
+
+# Colony scope: additional contribution from this Arkship's districts.
+afse_settled_arkship_district_empire_size = {
+	base = 0
+	complex_trigger_modifier = {
+		trigger = num_districts
+		parameters = { type = any }
+		multiplier = 0.5
+		mode = add
+	}
+	mult = value:afse_colony_ascension_empire_size_factor
+	mult = owner.value:scripted_modifier_mult|MODIFIER|empire_size_districts_mult|
+}
+
+# Each Colony Ascension Tier reduces that Arkship's contribution by 5%.
+afse_colony_ascension_empire_size_factor = {
+	# Read the current Ascension Tier.
+	base = 0
+	complex_trigger_modifier = {
+		trigger = has_planetary_ascension_tier
+		trigger_scope = planet
+		mode = add
+	}
+
+	# Base reduction is 5% per tier.
+	mult = -0.05
+
+	# Include Harmony, Ascensionists, federation bonuses and all other sources.
+	mult = owner.value:scripted_modifier_mult|MODIFIER|planetary_ascension_effect_mult|
+
+	# Convert the reduction into the remaining Empire Size factor.
+	add = 1
+	min = 0
+	max = 1
+}
+
+# Country scope: exposes the total accumulated value to the modifier.
+afse_settled_arkship_empire_size_total = {
+	base = 0
+	add = afse_settled_arkship_empire_size_total
+}

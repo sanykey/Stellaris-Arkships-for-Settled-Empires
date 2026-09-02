@@ -1,0 +1,51 @@
+afse_settled_empire_arkship_colonization_effect = {
+	hidden_effect = {
+		$SETTLED_SYSTEM$ = {
+			remove_star_flag = nomad_settling_in_progress
+			create_starbase = {
+				size = starbase_starport
+				module = shipyard
+				module = solar_panel_network
+				building = crew_quarters
+				owner = $SETTLING_COUNTRY$
+			}
+			every_system_planet = {
+				limit = { has_deposit_for = shipclass_mining_station }
+				create_mining_station = { owner = $SETTLING_COUNTRY$ }
+			}
+			every_system_planet = {
+				limit = { has_deposit_for = shipclass_research_station }
+				create_research_station = { owner = $SETTLING_COUNTRY$ }
+			}
+		}
+		$SETTLED_PLANET$ = {
+			set_timed_carrier_flag = {
+				flag = nomad_recently_settled_flag
+				days = 1
+			}
+			transfer_carrier = {
+				source = $SETTLING_ARKSHIP$
+				target = this
+				transfer_ownership = yes
+				transfer_controller = yes
+				merge_pops = yes
+				destroy_colony = yes
+			}
+		}
+		$SETTLING_ARKSHIP$.fleet? = {
+			destroy_fleet = {
+				target = this
+				kill_leader = no
+			}
+		}
+		create_ambient_object = {
+			type = ambient_arkship_destroyed
+		}
+	}
+
+	$SETTLED_PLANET$ = {
+		add_modifier = {
+			modifier = arkship_parts
+		}
+	}
+}

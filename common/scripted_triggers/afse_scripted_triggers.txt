@@ -1,0 +1,16 @@
+afse_can_research_arkship_technologies = {
+	OR = {
+		# Preserve the vanilla technology path for Nomadic empires.
+		is_nomadic = yes
+
+		# Give settled empires access after mastering megastructures and Adaptability.
+		AND = {
+			is_nomadic = no
+			has_technology = tech_mega_engineering
+			OR = {
+				has_tradition = tr_adaptability_finish
+				has_tradition = tr_versatility_finish
+			}
+		}
+	}
+}

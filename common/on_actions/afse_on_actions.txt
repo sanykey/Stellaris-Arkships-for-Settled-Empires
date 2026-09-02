@@ -1,0 +1,11 @@
+afse_on_arkship_settle = {
+	events = { afse.20 }
+}
+
+on_monthly_pulse_country = {
+	events = { afse.10 }
+}
+
+on_colony_ascension_tier_increased = {
+	events = { afse.11 }
+}

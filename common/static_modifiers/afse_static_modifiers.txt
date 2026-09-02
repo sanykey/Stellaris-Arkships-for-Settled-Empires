@@ -1,0 +1,5 @@
+afse_settled_arkship_empire_size = {
+	empire_size_add = 1
+	custom_tooltip = afse_settled_arkship_empire_size_breakdown
+	show_only_custom_tooltip = yes
+}

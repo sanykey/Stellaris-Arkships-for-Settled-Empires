@@ -1,0 +1,6 @@
+﻿l_english:
+ afse_settle_keep_arkships: "We shall make our home here, but our Arkships will sail on."
+ afse_settle_keep_arkships_tt: "\nAll remaining §Y$arkship_cap_plural$§! remain under our direct control."
+ afse_settled_arkship_empire_size: "Settled Arkships"
+ afse_settled_arkship_empire_size_desc: "Arkships and their districts retain the increased administrative burden of Nomadic colonies."
+ afse_settled_arkship_empire_size_breakdown: "Additional Empire Size: §Y+[Root.afse_settled_arkship_empire_size_total]§!\n$t$From §Y[Root.afse_settled_arkship_count]§! Arkships: §Y+[Root.afse_settled_arkship_colony_empire_size_total]§!\n$t$From §Y[Root.afse_settled_arkship_district_count]§! Arkship Districts: §Y+[Root.afse_settled_arkship_district_empire_size_total]§!\n\nColony Ascension and Empire Size reductions from Colonies and Districts are included."

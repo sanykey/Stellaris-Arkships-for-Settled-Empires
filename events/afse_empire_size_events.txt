@@ -1,0 +1,124 @@
+namespace = afse
+
+# Scope: country
+country_event = {
+	id = afse.10
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_modifier = afse_settled_arkship_empire_size
+			AND = {
+				is_nomadic = no
+				any_owned_colony = {
+					is_planet_class = pc_ark
+				}
+			}
+		}
+	}
+
+	immediate = {
+		remove_modifier = afse_settled_arkship_empire_size
+		set_variable = {
+			which = afse_settled_arkship_count
+			value = 0
+		}
+		set_variable = {
+			which = afse_settled_arkship_district_count
+			value = 0
+		}
+		set_variable = {
+			which = afse_settled_arkship_colony_empire_size_total
+			value = 0
+		}
+		set_variable = {
+			which = afse_settled_arkship_district_empire_size_total
+			value = 0
+		}
+		set_variable = {
+			which = afse_settled_arkship_empire_size_total
+			value = 0
+		}
+
+		if = {
+			limit = { is_nomadic = no }
+			every_owned_colony = {
+				limit = { is_planet_class = pc_ark }
+				set_variable = {
+					which = afse_current_arkship_district_count
+					value = value:afse_arkship_district_count
+				}
+				set_variable = {
+					which = afse_current_arkship_colony_empire_size
+					value = value:afse_settled_arkship_colony_empire_size
+				}
+				set_variable = {
+					which = afse_current_arkship_district_empire_size
+					value = value:afse_settled_arkship_district_empire_size
+				}
+				root = {
+					change_variable = {
+						which = afse_settled_arkship_count
+						value = 1
+					}
+					change_variable = {
+						which = afse_settled_arkship_district_count
+						value = prev.afse_current_arkship_district_count
+					}
+					change_variable = {
+						which = afse_settled_arkship_colony_empire_size_total
+						value = prev.afse_current_arkship_colony_empire_size
+					}
+					change_variable = {
+						which = afse_settled_arkship_district_empire_size_total
+						value = prev.afse_current_arkship_district_empire_size
+					}
+				}
+				clear_variable = afse_current_arkship_district_count
+				clear_variable = afse_current_arkship_colony_empire_size
+				clear_variable = afse_current_arkship_district_empire_size
+			}
+			set_variable = {
+				which = afse_settled_arkship_empire_size_total
+				value = afse_settled_arkship_colony_empire_size_total
+			}
+			change_variable = {
+				which = afse_settled_arkship_empire_size_total
+				value = afse_settled_arkship_district_empire_size_total
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = {
+					which = afse_settled_arkship_empire_size_total
+					value > 0
+				}
+			}
+			add_modifier = {
+				modifier = afse_settled_arkship_empire_size
+				multiplier = value:afse_settled_arkship_empire_size_total
+				days = -1
+			}
+		}
+	}
+}
+
+# Scope: colony
+planet_event = {
+	id = afse.11
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_planet_class = pc_ark
+		owner = { is_nomadic = no }
+	}
+
+	immediate = {
+		owner = {
+			country_event = { id = afse.10 }
+		}
+	}
+}

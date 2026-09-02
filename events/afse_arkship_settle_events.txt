@@ -1,0 +1,52 @@
+namespace = afse
+
+# Scope: planet
+# From scope: settling Arkship fleet
+planet_event = {
+	id = afse.20
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_timed_carrier_flag = {
+			flag = nomad_recently_settled_flag
+			days = 30
+		}
+		save_event_target_as = settled_planet
+		solar_system = {
+			set_timed_star_flag = {
+				flag = nomad_settling_in_progress
+				days = 300
+			}
+			save_event_target_as = settled_system
+		}
+		from = {
+			random_owned_ship = {
+				limit = { is_colony = yes }
+				save_event_target_as = settling_arkship
+			}
+		}
+		from.owner = {
+			save_event_target_as = player_country
+		}
+
+		if = {
+			limit = {
+				event_target:player_country = {
+					is_nomadic = yes
+				}
+			}
+			event_target:player_country = {
+				country_event = { id = afse.21 }
+			}
+		}
+		else = {
+			afse_settled_empire_arkship_colonization_effect = {
+				SETTLING_COUNTRY = event_target:player_country
+				SETTLING_ARKSHIP = event_target:settling_arkship
+				SETTLED_PLANET = event_target:settled_planet
+				SETTLED_SYSTEM = event_target:settled_system
+			}
+		}
+	}
+}
