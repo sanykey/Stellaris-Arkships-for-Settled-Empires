@@ -101,6 +101,43 @@ By default, each Ascension Tier reduces the additional contribution of an Arkshi
 
 Values are refreshed after ascending a colony and during the monthly recalculation.
 
+## Expected Error Log Messages
+
+This mod overrides the following vanilla technology IDs:
+
+- `tech_planetary_engineering`;
+- `tech_arkship_construction`;
+- `tech_arkship_tier_2`;
+- `tech_arkship_tier_3`;
+- `tech_civilian_arkship`;
+- `tech_science_arkship`;
+- `tech_military_arkship`;
+- `tech_arkship_planetary_refinery`;
+- `tech_arkship_stellar_igniter`;
+- `tech_arkship_system_scanner`;
+- `tech_arkship_exodus_jump`.
+
+It also overrides the vanilla scripted action `arkship_settle`.
+
+Because these objects deliberately retain their vanilla IDs, Stellaris writes the following expected messages to `error.log`:
+
+```text
+[game_singleobjectdatabase.h:170]: Object with key: tech_planetary_engineering already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 4
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_construction already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 50
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_tier_2 already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 87
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_tier_3 already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 128
+[game_singleobjectdatabase.h:170]: Object with key: tech_civilian_arkship already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 173
+[game_singleobjectdatabase.h:170]: Object with key: tech_science_arkship already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 219
+[game_singleobjectdatabase.h:170]: Object with key: tech_military_arkship already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 265
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_planetary_refinery already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 314
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_stellar_igniter already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 366
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_system_scanner already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 413
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_exodus_jump already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 473
+[game_singleobjectdatabase.h:170]: Object with key: arkship_settle already exists, using the one at  file: common/scripted_actions/afse_arkship_settle.txt line: 1
+```
+
+These messages are harmless, do not affect gameplay and can be ignored.
+
 ## Compatibility and Saved Games
 
 The mod can be added to an existing saved game. New technologies may not appear immediately and can require the available research alternatives to refresh.

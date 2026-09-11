@@ -101,6 +101,43 @@
 
 Значения обновляются после возвышения колонии и при ежемесячном пересчёте.
 
+## Ожидаемые сообщения в error.log
+
+Мод переопределяет следующие ID ванильных технологий:
+
+- `tech_planetary_engineering`;
+- `tech_arkship_construction`;
+- `tech_arkship_tier_2`;
+- `tech_arkship_tier_3`;
+- `tech_civilian_arkship`;
+- `tech_science_arkship`;
+- `tech_military_arkship`;
+- `tech_arkship_planetary_refinery`;
+- `tech_arkship_stellar_igniter`;
+- `tech_arkship_system_scanner`;
+- `tech_arkship_exodus_jump`.
+
+Также мод переопределяет ванильное скриптовое действие `arkship_settle`.
+
+Поскольку эти объекты намеренно сохраняют ванильные ID, Stellaris записывает в `error.log` следующие ожидаемые сообщения:
+
+```text
+[game_singleobjectdatabase.h:170]: Object with key: tech_planetary_engineering already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 4
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_construction already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 50
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_tier_2 already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 87
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_tier_3 already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 128
+[game_singleobjectdatabase.h:170]: Object with key: tech_civilian_arkship already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 173
+[game_singleobjectdatabase.h:170]: Object with key: tech_science_arkship already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 219
+[game_singleobjectdatabase.h:170]: Object with key: tech_military_arkship already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 265
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_planetary_refinery already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 314
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_stellar_igniter already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 366
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_system_scanner already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 413
+[game_singleobjectdatabase.h:170]: Object with key: tech_arkship_exodus_jump already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 473
+[game_singleobjectdatabase.h:170]: Object with key: arkship_settle already exists, using the one at  file: common/scripted_actions/afse_arkship_settle.txt line: 1
+```
+
+Эти сообщения безвредны, не влияют на игровой процесс, и их можно игнорировать.
+
 ## Совместимость и сохранения
 
 Мод можно подключить к существующему сохранению. Новые технологии могут появиться не сразу, а при следующем обновлении доступных вариантов исследований.

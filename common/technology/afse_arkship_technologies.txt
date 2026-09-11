@@ -1,5 +1,52 @@
 # Vanilla Arkship technologies with AFSE availability for settled empires.
 
+# Planetary Engineering gates Civilian Arkships and the Planetary Refinery.
+tech_planetary_engineering = {
+	area = engineering
+	category = { industry }
+	tier = 2
+	cost = @tier2cost1
+	weight = @tier2weight1
+
+	prerequisites = {
+		"tech_space_exploration"
+		"tech_space_mining_2"
+	}
+
+	potential = {
+		afse_can_research_arkship_technologies = yes
+	}
+
+	prereqfor_desc = {
+		custom = {
+			title = "TECH_UNLOCK_CLEAR_BLOCKER_CONTRACT_TITLE"
+			desc = "TECH_UNLOCK_CLEAR_BLOCKER_CONTRACT_DESC"
+		}
+	}
+
+	weight_modifier = {
+		modifier = {
+			factor = 2
+			has_technology = tech_space_mining_3
+		}
+		modifier = {
+			factor = 2
+			has_technology = tech_space_mining_4
+		}
+		modifier = {
+			factor = 2
+			has_technology = tech_space_mining_5
+		}
+		modifier = {
+			factor = 1.25
+			has_tradition = tr_expansion_adopt
+		}
+	}
+
+	ai_weight = {
+	}
+}
+
 tech_arkship_construction = {
 	area = engineering
 	category = { voidcraft }
