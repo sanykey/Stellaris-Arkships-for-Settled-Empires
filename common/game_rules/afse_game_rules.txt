@@ -5,10 +5,7 @@ can_nomad_settle = {
 				is_nomadic = yes
 				AND = {
 					is_nomadic = no
-					OR = {
-						has_tradition = tr_adaptability_finish
-						has_tradition = tr_versatility_finish
-					}
+					has_ascension_perk = ap_afse_arkship_continuity
 				}
 			}
 		}

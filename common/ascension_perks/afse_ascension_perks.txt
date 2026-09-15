@@ -1,0 +1,392 @@
+# Vanilla Ascension Perks with their Nomadic bonuses retained by Arkship-capable settled empires.
+
+ap_afse_arkship_continuity = {
+	modifier = {
+		# Replicate the Logistic Ship limit from the Nomadic Zero-G Engineering swap.
+		nomadic_constructor_limit_add = 2
+	}
+
+	possible = {
+		custom_tooltip = {
+			fail_text = "requires_ascension_perks_3"
+			num_ascension_perks > 2
+		}
+		custom_tooltip = {
+			fail_text = afse_requires_adaptability_or_versatility
+			OR = {
+				has_tradition = tr_adaptability_finish
+				has_tradition = tr_versatility_finish
+			}
+		}
+	}
+
+	potential = {
+		has_nomads_dlc = yes
+		NOT = { has_ascension_perk = ap_afse_arkship_continuity }
+	}
+
+	on_enabled = {
+		custom_tooltip = afse_arkship_continuity_effects
+		if = {
+			limit = {
+				NOT = { has_technology = tech_waystation_1 }
+			}
+			give_technology = {
+				tech = tech_waystation_1
+				message = yes
+			}
+		}
+	}
+
+	ai_weight = { factor = 10 }
+}
+
+ap_wanderlust = {
+	potential = {
+		has_nomads_dlc = yes
+		NOT = {
+			has_ascension_perk = ap_wanderlust
+		}
+		OR = {
+			is_nomadic = yes
+			afse_is_settled_arkship_empire = yes
+		}
+	}
+
+	on_enabled = {
+		custom_tooltip = ap_wanderlust_tooltip
+		hidden_effect = {
+			country_event = { id = nomads.4715 }
+		}
+	}
+
+	triggered_modifier = {
+		planet_max_districts_add = 1
+		leaders_upkeep_mult = -0.1
+	}
+
+	triggered_modifier = {
+		potential = {
+			OR = { #somehow, we need a redundancy here to not get the modifier when initially picking up the AP (even though it gets cleared on monthly tick)
+				has_country_flag = ancient_wonders_completed
+				has_country_flag = antique_threat_completed
+				has_country_flag = enclave_completed
+				has_country_flag = galactic_landmark_completed
+				has_country_flag = marauder_completed
+				has_country_flag = natural_spectacle_completed
+				has_country_flag = precursor_completed
+				has_country_flag = space_ecology_completed
+			}
+			calc_true_if = {
+				amount >= 4
+				OR = {
+					has_country_flag = ancient_wonders_completed
+					check_variable = { which = ancient_wonders_system_count value = 0 }
+				}
+				OR = {
+					has_country_flag = antique_threat_completed
+					check_variable = { which = antique_threat_system_count value = 0 }
+				}
+				OR = {
+					has_country_flag = enclave_completed
+					check_variable = { which = enclave_system_count value = 0 }
+				}
+				OR = {
+					has_country_flag = galactic_landmark_completed
+					check_variable = { which = galactic_landmark_system_count value = 0 }
+				}
+				OR = {
+					has_country_flag = marauder_completed
+					check_variable = { which = marauder_system_count value = 0 }
+				}
+				OR = {
+					has_country_flag = natural_spectacle_completed
+					check_variable = { which = natural_spectacle_system_count value = 0 }
+				}
+				OR = {
+					has_country_flag = precursor_completed
+					check_variable = { which = precursor_system_count value = 0 }
+				}
+				OR = {
+					has_country_flag = space_ecology_completed
+					check_variable = { which = space_ecology_system_count value = 0 }
+				}
+			}
+		}
+		planet_max_districts_add = 1
+		leaders_upkeep_mult = -0.1
+		tradition_cost_mult = -0.1
+	}
+
+	ai_weight = {
+		factor = 5
+		modifier = {
+			factor = 2
+			has_ethic = ethic_materialist
+		}
+		modifier = {
+			factor = 3
+			has_ethic = ethic_fanatic_materialist
+		}
+		modifier = {
+			factor = 0
+			is_xenophobe = yes
+		}
+		modifier = {
+			factor = 1.25
+			is_xenophile = yes
+		}
+	}
+}
+
+ap_interstellar_dominion = {
+	triggered_modifier = {
+		potential = { is_nomadic = no }
+		country_starbase_influence_cost_mult = -0.20
+		country_claim_influence_cost_mult = -0.20
+		empire_size_systems_mult = -0.25
+		add_attunement_the_eater_of_worlds = @ascension_perk_attunement1
+	}
+
+	triggered_modifier = {
+		potential = {
+			is_nomadic = yes
+			is_eager_explorer_empire = no
+		}
+		megastructures_waystations_influence_cost_mult = -0.20
+		starbase_stockpile_capacity_mult = 0.15
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
+		add_attunement_the_eater_of_worlds = @ascension_perk_attunement1
+	}
+
+	triggered_modifier = {
+		potential = {
+			is_nomadic = yes
+			is_eager_explorer_empire = yes
+		}
+		megastructures_waystations_influence_cost_mult = -0.20
+		starbase_stockpile_capacity_mult = 0.15
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
+		shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.15
+		add_attunement_the_eater_of_worlds = @ascension_perk_attunement1
+	}
+
+	triggered_modifier = {
+		potential = {
+			afse_is_settled_arkship_empire = yes
+			is_eager_explorer_empire = no
+		}
+		megastructures_waystations_influence_cost_mult = -0.20
+		starbase_stockpile_capacity_mult = 0.15
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
+	}
+
+	triggered_modifier = {
+		potential = {
+			afse_is_settled_arkship_empire = yes
+			is_eager_explorer_empire = yes
+		}
+		megastructures_waystations_influence_cost_mult = -0.20
+		starbase_stockpile_capacity_mult = 0.15
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
+		shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.15
+	}
+
+	potential = {
+		NOT = {
+			has_ascension_perk = ap_interstellar_dominion
+		}
+	}
+
+	ai_weight = {
+		factor = 10
+		modifier = {
+			factor = 2
+			has_ethic = ethic_xenophobe
+		}
+		modifier = {
+			factor = 3
+			has_ethic = ethic_fanatic_xenophobe
+		}
+		modifier = {
+			factor = 0
+			is_pacifist = yes
+			years_passed > 40
+		}
+		modifier = {
+			factor = 0
+			OR = { #useless, total war CBs
+				is_homicidal = yes
+				has_valid_civic = civic_machine_assimilator
+				has_ascension_perk = ap_become_the_crisis
+				has_ascension_perk = ap_colossus
+			}
+		}
+	}
+}
+
+ap_mastery_of_nature = {
+	on_enabled = {
+		custom_tooltip = "describe_decision_mastery_of_nature"
+	}
+	modifier = {
+		deposit_blockers_cost_mult = -0.33
+		add_attunement_the_instrument_of_desire = @ascension_perk_attunement1
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		arkship_harvest_resources_produces_mult = 0.5
+		ship_starbase_stockpile_collection_rate_mult = 0.10
+	}
+
+	potential = {
+		NOR = {
+			has_ascension_perk = ap_mastery_of_nature
+			is_environmental_architects_empire = yes
+		}
+	}
+
+	tradition_swap = {
+		inherit_effects = yes
+		inherit_icon = yes
+		name = ap_mastery_of_nature_wilderness
+		trigger = {
+			is_wilderness_empire = yes
+		}
+	}
+
+	tradition_swap = {
+		inherit_effects = no
+		inherit_icon = yes
+		name = ap_mastery_of_nature_nomads
+		trigger = {
+			is_nomadic = yes
+		}
+		modifier = {
+			arkship_harvest_resources_produces_mult = 0.5
+			ship_starbase_stockpile_collection_rate_mult = 0.10
+			add_attunement_the_instrument_of_desire = @ascension_perk_attunement1
+		}
+	}
+
+	ai_weight = {
+		factor = 10
+		modifier = {
+			factor = 0
+			OR = {
+				is_void_dweller_empire = yes
+				has_origin = origin_shattered_ring
+			}
+		}
+		modifier = {
+			factor = 2
+			years_passed > 40
+			num_owned_planets < 5
+		}
+		modifier = {
+			factor = 2
+			years_passed > 80
+			num_owned_planets < 10
+		}
+	}
+}
+
+ap_voidborn = {
+	potential = {
+		is_void_dweller_empire = no
+		is_wilderness_empire = no
+	}
+
+	possible = {
+		OR = {
+			custom_tooltip = {
+				fail_text = "requires_technology_habitat_1"
+				has_technology = tech_habitat_1
+			}
+			custom_tooltip = {
+				fail_text = "requires_tech_arkship_tier_2"
+				has_technology = tech_arkship_tier_2
+			}
+		}
+	}
+
+	on_enabled = {
+		custom_tooltip = "ap_voidborn_habitat_effect"
+		if = {
+			limit = {
+				is_nomadic = no
+				NOT = { has_technology = tech_habitat_2 }
+			}
+			add_research_option = tech_habitat_2
+			custom_tooltip = "add_research_options_voidborn"
+		}
+		if = {
+			limit = {
+				is_nomadic = no
+				has_technology = tech_habitat_2
+				NOT = { has_technology = tech_habitat_3 }
+			}
+			add_research_option = tech_habitat_3
+		}
+	}
+
+	modifier = {
+		habitat_max_districts_add = 2
+		megastructures_habitat_cost_mult = -0.20
+		planet_districts_hab_cost_mult = -0.20
+		habitat_districts_minor_add = 0.25
+		habitat_district_jobs_mult = 0.5
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		pc_ark_max_districts_add = 2
+		megastructures_arkships_cost_mult = -0.10
+		starbase_arkship_upgrades_cost_mult = -0.15
+		pc_ark_habitability = 0.2
+	}
+
+	tradition_swap = {
+		inherit_effects = no
+		inherit_icon = yes
+		inherit_name = yes
+		trigger = {
+			is_nomadic = yes
+		}
+		modifier = {
+			pc_ark_max_districts_add = 2
+			megastructures_arkships_cost_mult = -0.10
+			starbase_arkship_upgrades_cost_mult = -0.15
+			pc_ark_habitability = 0.2
+		}
+	}
+
+	ai_weight = {
+		base = 10
+		complex_trigger_modifier = {
+			trigger = count_owned_planet
+			parameters = {
+				limit = { is_planet_class = pc_habitat }
+			}
+			mode = add
+			mult = 2
+		}
+		modifier = {
+			factor = 2
+			has_ethic = ethic_pacifist
+		}
+		modifier = {
+			factor = 3
+			has_ethic = ethic_fanatic_pacifist
+		}
+		modifier = {
+			factor = 100
+			OR = {
+				has_origin = origin_toxic_knights
+				has_country_flag = payback_habitat
+				has_valid_civic = civic_void_hive
+			}
+		}
+	}
+}

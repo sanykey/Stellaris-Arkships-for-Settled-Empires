@@ -1,0 +1,45 @@
+namespace = afse
+
+# Scope = Country
+country_event = {
+	id = afse.30
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_ascension_perk = ap_afse_arkship_continuity
+		NOT = { has_technology = tech_waystation_1 }
+	}
+
+	immediate = {
+		give_technology = {
+			tech = tech_waystation_1
+			message = no
+		}
+	}
+}
+
+# Scope: Country
+country_event = {
+	id = afse.31
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {
+				afse_is_settled_arkship_empire = yes
+				is_homicidal = yes
+				has_active_tradition = tr_cybernetics_organ_harvesting
+			}
+			set_country_flag = homicidal_cyber_nomads_bombardment_country_flag
+		}
+		else_if = {
+			limit = {
+				is_nomadic = no
+				has_country_flag = homicidal_cyber_nomads_bombardment_country_flag
+			}
+			remove_country_flag = homicidal_cyber_nomads_bombardment_country_flag
+		}
+	}
+}

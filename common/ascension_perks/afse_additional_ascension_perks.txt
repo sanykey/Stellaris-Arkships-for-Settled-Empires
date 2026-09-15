@@ -1,0 +1,136 @@
+# Additional vanilla Ascension Perks with Nomadic effects retained by Arkship-capable Settled empires.
+
+ap_imperial_prerogative = {
+	triggered_modifier = {
+		potential = { is_nomadic = no }
+		empire_size_colonies_mult = -0.25
+		country_official_cap_add = 2
+	}
+
+	triggered_modifier = {
+		potential = { is_nomadic = yes }
+		pop_cat_ruler_bonus_workforce_mult = 0.15
+		country_official_cap_add = 2
+	}
+
+	potential = {
+		NOT = {
+			has_ascension_perk = ap_imperial_prerogative
+		}
+		is_megacorp = no
+	}
+
+	ai_weight = {
+		factor = 15
+		modifier = {
+			factor = 0
+			num_owned_planets < 5
+		}
+		modifier = {
+			factor = 0.1
+			num_owned_planets < 7
+		}
+		modifier = {
+			factor = 2
+			num_owned_planets > 20
+		}
+		modifier = {
+			factor = 5
+			num_owned_planets > 40
+		}
+	}
+
+	on_enabled = {
+		run_ai_strategic_data = yes
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		pop_cat_ruler_bonus_workforce_mult = 0.15
+	}
+}
+
+ap_eternal_vigilance = {
+	possible = {
+		custom_tooltip = {
+			fail_text = "requires_technology_starbase_4"
+			OR = {
+				has_technology = tech_starbase_4
+				has_tradition = tr_unyielding_finish
+			}
+		}
+	}
+
+	potential = {
+		is_nomadic = no
+		NOT = {
+			has_ascension_perk = ap_eternal_vigilance
+		}
+	}
+
+	modifier = {
+		country_commander_cap_add = 1
+		shipclass_starbase_damage_mult = 0.25
+		shipclass_starbase_hull_mult = 0.25
+		shipclass_military_station_damage_mult = 0.25
+		starbase_defense_platform_capacity_add = 5
+		ship_military_station_small_upkeep_mult = -0.5
+		ship_home_territory_fire_rate_mult = 0.2
+		add_attunement_the_cradle_of_souls = @ascension_perk_attunement1
+	}
+
+	triggered_modifier = {
+		potential = {
+			has_biogenesis_dlc = yes
+		}
+		deep_space_citadel_limit_add = 1
+	}
+
+#	on_enabled = {
+#		custom_tooltip = ap_eternal_vigilance_tt
+#		hidden_effect = {
+#			country_event = {
+#				id = country.2050
+#				days = 180
+#			}
+#		}
+#	}
+
+	ai_weight = {
+		factor = 2
+		modifier = {
+			factor = 5
+			has_civic = civic_inwards_perfection
+		}
+		modifier = {
+			factor = 5
+			has_civic = civic_sovereign_guardianship
+		}
+		modifier = {
+			factor = 5
+			has_tradition = tr_unyielding_finish
+		}
+		modifier = {
+			factor = 1.5
+			is_xenophobe = yes
+		}
+		modifier = {
+			factor = 1.5
+			any_neighbor_country = {
+				is_country_type = default
+				opinion_level = { who = root level <= poor }
+				relative_power = { who = root value >= superior }
+			}
+		}
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		waystation_armor_hardening_add = 0.25
+		waystation_shield_hardening_add = 0.15
+		waystation_hull_mult = 0.25
+		starbase_waystations_alloys_cost_mult = -0.25
+		arkship_fire_rate = 0.25
+		ship_hull_mult = 0.25
+	}
+}

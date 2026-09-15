@@ -1,0 +1,14 @@
+# Show the shared Logistics Ship limit to both Nomadic empires and settled AFSE empires.
+nomadic_constructor_limit = {
+	ship_types = {
+		nomads_constructor
+		nomads_engineer_vessel
+	}
+	base = modifier:nomadic_constructor_limit_add
+	show = {
+		OR = {
+			is_nomadic = yes
+			afse_is_settled_arkship_empire = yes
+		}
+	}
+}

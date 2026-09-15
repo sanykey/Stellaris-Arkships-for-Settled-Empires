@@ -46,11 +46,7 @@ potential = {
 		# Settled empires construct Arkships with construction ships.
 		AND = {
 			is_nomadic = no
-			has_technology = tech_mega_engineering
-			OR = {
-				has_tradition = tr_adaptability_finish
-				has_tradition = tr_versatility_finish
-			}
+			has_ascension_perk = ap_afse_arkship_continuity
 			from = {
 				is_ship_class = shipclass_constructor
 			}
@@ -84,4 +80,3 @@ on_build_complete = {
 		country_event = { id = timeline.100 }
 	}
 }
-

@@ -99,9 +99,11 @@ country_event = {
 				count > 1
 				limit = { is_arkship_ship = yes }
 			}
-			OR = {
-				has_tradition = tr_adaptability_finish
-				has_tradition = tr_versatility_finish
+		}
+		allow = {
+			custom_tooltip = {
+				fail_text = afse_requires_arkship_continuity
+				has_ascension_perk = ap_afse_arkship_continuity
 			}
 		}
 		name = afse_settle_keep_arkships

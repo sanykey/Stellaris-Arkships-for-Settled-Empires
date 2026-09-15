@@ -1,0 +1,7 @@
+spriteTypes = {
+	spriteType = {
+		name = "GFX_ap_afse_arkship_continuity"
+		texturefile = "gfx/interface/icons/ascension_perks/ap_voidborn.dds"
+		alwaystransparent = yes
+	}
+}

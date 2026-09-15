@@ -1,0 +1,876 @@
+# Vanilla traditions with Nomadic effects retained by Arkship-capable Settled empires.
+
+tr_adaptability_survival_fittest = {
+	possible = {
+		has_tradition = tr_adaptability_recycling
+	}
+
+	modifier = {
+		planet_orbital_bombardment_damage = -0.25
+		army_defense_damage_mult = 0.25
+	}
+
+	tradition_swap = {
+		name = tr_adaptability_survival_fittest_nomad
+		inherit_icon = yes
+		trigger = { is_nomadic = yes }
+		custom_tooltip = tr_adaptability_survival_fittest_nomad_desc
+		modifier = {
+			shipsize_civilian_arkship_tier_1_hull_mult = 0.25
+			shipsize_civilian_arkship_tier_2_hull_mult = 0.25
+			shipsize_civilian_arkship_tier_3_hull_mult = 0.25
+			shipsize_science_arkship_tier_1_hull_mult = 0.25
+			shipsize_science_arkship_tier_2_hull_mult = 0.25
+			shipsize_science_arkship_tier_3_hull_mult = 0.25
+			shipsize_military_arkship_tier_1_hull_mult = 0.25
+			shipsize_military_arkship_tier_2_hull_mult = 0.25
+			shipsize_military_arkship_tier_3_hull_mult = 0.25
+		}
+		weight = { factor = 1 }
+	}
+
+	ai_weight = {
+		factor = 5000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		shipsize_civilian_arkship_tier_1_hull_mult = 0.25
+		shipsize_civilian_arkship_tier_2_hull_mult = 0.25
+		shipsize_civilian_arkship_tier_3_hull_mult = 0.25
+		shipsize_science_arkship_tier_1_hull_mult = 0.25
+		shipsize_science_arkship_tier_2_hull_mult = 0.25
+		shipsize_science_arkship_tier_3_hull_mult = 0.25
+		shipsize_military_arkship_tier_1_hull_mult = 0.25
+		shipsize_military_arkship_tier_2_hull_mult = 0.25
+		shipsize_military_arkship_tier_3_hull_mult = 0.25
+	}
+}
+
+tr_adaptability_adaptive_ecology = {
+	possible = {
+		has_tradition = tr_adaptability_environmental_diversification
+	}
+
+	modifier = {
+		planet_non_artificial_max_districts_add = 1
+	}
+
+	tradition_swap = {
+		name = tr_adaptability_adaptive_ecology_void
+		inherit_icon = yes
+		inherit_effects = no
+		trigger = {
+			has_void_dweller_origin = yes
+		}
+		modifier = {
+			planet_artificial_max_districts_add = 1
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_adaptability_adaptive_ecology_nomad
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+			is_hive_empire = no
+		}
+		modifier = {
+			planet_artificial_max_districts_add = 1
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_adaptability_adaptive_ecology_hive_nomad
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+			is_hive_empire = yes
+		}
+		modifier = {
+			planet_artificial_max_districts_add = 1
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	ai_weight = {
+		factor = 5000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		planet_artificial_max_districts_add = 1
+	}
+}
+
+tr_adaptability_appropriation = {
+	possible = {
+		has_tradition = tr_adaptability_environmental_diversification
+	}
+
+	modifier = {
+		pop_resettlement_cost_mult = -0.5
+		planet_resettlement_unemployed_mult = 0.25
+	}
+
+	tradition_swap = {
+		name = tr_adaptability_appropriation_egalitarian
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_egalitarian = yes
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		trigger = { is_wilderness_empire = yes }
+		name = tr_adaptability_appropriation_wilderness
+		inherit_icon = yes
+		modifier = {
+			terraform_speed_mult = 0.25
+		}
+		weight = { factor = 1 }
+	}
+
+	tradition_swap = {
+		trigger = { is_nomadic = yes }
+		name = tr_adaptability_appropriation_nomads
+		inherit_icon = yes
+		modifier = {
+			starbase_modules_cost_mult = -0.3
+		}
+		weight = { factor = 1 }
+	}
+
+	ai_weight = {
+		factor = 1000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		starbase_modules_cost_mult = -0.30
+	}
+}
+
+tr_diplomacy_entente_coordination = {
+	possible = {
+		has_tradition = tr_diplomacy_the_federation
+	}
+
+	modifier = {
+		federation_naval_cap_contribution_mult = 1.00
+		country_border_friction_mult = -0.25
+	}
+
+	tradition_swap = {
+		inherit_name = yes
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+		}
+
+		modifier = {
+			federation_naval_cap_contribution_mult = 1.00
+			nomadic_contract_value_mult = 0.25
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	ai_weight = {
+		factor = 1000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		nomadic_contract_value_mult = 0.25
+	}
+}
+
+tr_discovery_databank_uplinks = {
+	possible = {
+		has_tradition = tr_discovery_to_boldly_go
+	}
+
+	custom_tooltip = tr_discovery_databank_uplinks_desc
+	modifier = {
+		station_researchers_produces_mult = 0.20
+		starbase_constructions_physics_research_produces_mult = 0.20
+		starbase_constructions_society_research_produces_mult = 0.20
+		starbase_constructions_engineering_research_produces_mult = 0.20
+	}
+
+	tradition_swap = {
+		name = tr_discovery_databank_uplinks_nomads
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+		}
+		modifier = {
+			starbase_collected_system_physics_research_mult = 0.2
+			starbase_collected_system_society_research_mult = 0.2
+			starbase_collected_system_engineering_research_mult = 0.2
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	ai_weight = {
+		factor = 5000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		starbase_collected_system_physics_research_mult = 0.20
+		starbase_collected_system_society_research_mult = 0.20
+		starbase_collected_system_engineering_research_mult = 0.20
+	}
+}
+
+tr_domestication_bio_repurposing = {
+	custom_tooltip_with_modifiers = tr_domestication_bio_repurposing_tt
+	modifier = {
+		planet_clear_blocker_speed_mult = 0.33
+	}
+
+
+	tradition_swap = {
+		inherit_icon = yes
+		inherit_name = yes
+		custom_tooltip_with_modifiers = tr_domestication_bio_repurposing_reanimator_tt
+		trigger = {
+			is_reanimator = yes
+			is_nomadic = no
+		}
+
+		modifier = {
+			planet_clear_blocker_speed_mult = 0.33
+			space_fauna_reanimation_cost_mult = -0.10
+		}
+	}
+
+	tradition_swap = {
+		name = tr_domestication_bio_repurposing_nomads
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+		}
+
+		modifier = {
+			ship_tiyanki_food_produces_add = 1
+			ship_amoeba_food_produces_add = 1
+			ship_crystalline_entity_minerals_produces_add = 1
+			ship_cutholoid_minerals_produces_add = 1
+			ship_voidworm_energy_produces_add = 1
+		}
+	}
+
+	ai_weight = {
+		factor = 1000
+		modifier = {
+			factor = 10
+			is_at_war = yes
+		}
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		ship_tiyanki_food_produces_add = 1
+		ship_amoeba_food_produces_add = 1
+		ship_crystalline_entity_minerals_produces_add = 1
+		ship_cutholoid_minerals_produces_add = 1
+		ship_voidworm_energy_produces_add = 1
+	}
+}
+
+tr_enmity_adopt = {
+	custom_tooltip_with_modifiers = tr_enmity_adopt_desc
+	unlocks_agenda = agenda_second_strike
+	modifier = {
+		max_rivalries = 1
+	}
+	tradition_swap = {
+		inherit_name = yes
+		inherit_effects = no
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+		}
+		custom_tooltip = tr_enmity_adopt_nomads_desc
+		modifier = {
+			max_rivalries = 1
+		}
+		triggered_modifier = {
+			logistic_growth_mult = 0.03
+			planet_pop_assembly_mult = 0.03
+			mult = trigger:num_rivals
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		logistic_growth_mult = 0.03
+		planet_pop_assembly_mult = 0.03
+		mult = trigger:num_rivals
+	}
+}
+
+tr_expansion_adopt = {
+	unlocks_agenda = agenda_superior_colonies
+	triggered_modifier = {
+		potential = {
+			is_wilderness_empire = no
+			is_nomadic = no
+		}
+		planet_colony_development_speed_mult = 0.25
+		megastructures_habitat_alloys_upkeep_mult = -0.20
+		planet_districts_hab_alloys_upkeep_mult = -0.20
+	}
+	triggered_modifier = {
+		potential = {
+			is_wilderness_empire = yes
+			is_nomadic = no
+		}
+		terraform_speed_mult = 0.25
+		starbases_upkeep_mult = -0.20
+	}
+	triggered_modifier = {
+		potential = {
+			is_nomadic = yes
+		}
+		megastructure_build_speed_mult = 0.25
+		starbase_waystations_upkeep_mult = -0.20
+		starbase_waystations_modules_upkeep_mult = -0.20
+	}
+	# Additional effects are implemented in 00_capital_buildings.txt
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		megastructure_build_speed_mult = 0.25
+		starbase_waystations_upkeep_mult = -0.20
+		starbase_waystations_modules_upkeep_mult = -0.20
+	}
+}
+
+tr_expansion_finish = {
+	modifier = {
+		planet_non_artificial_max_districts_add = 1
+		ascension_perks_add = 1
+	}
+
+	tradition_swap = {
+		name = tr_expansion_finish_void
+		inherit_name = yes
+		inherit_icon = yes
+		trigger = {
+			has_void_dweller_origin = yes
+		}
+
+		modifier = {
+			habitat_max_districts_add = 1
+			ascension_perks_add = 1
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_finish_nomad
+		inherit_name = yes
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+		}
+
+		modifier = {
+			planet_artificial_max_districts_add = 1
+			ascension_perks_add = 1
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		planet_artificial_max_districts_add = 1
+	}
+}
+
+tr_expansion_colonization_fever = {
+	modifier = {
+		colony_start_urban_districts_add = 1
+		planet_colony_development_speed_mult = 0.25
+	}
+
+	tradition_swap = {
+		name = tr_expansion_colonization_fever_nomad
+		inherit_effects = no
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+		}
+
+		modifier = {
+			empire_size_colonies_mult = -0.25
+			megastructures_arkships_cost_mult = -0.05
+			starbase_arkship_upgrades_cost_mult = -0.10
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_colonization_fever_machine
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_machine_empire = yes
+			is_nomadic = no
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_colonization_fever_hive
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_hive_empire = yes
+			is_wilderness_empire = no
+			is_nomadic = no
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_colonization_fever_wilderness
+		custom_tooltip = tr_expansion_colonization_fever_wilderness_desc
+		inherit_effects = no
+		inherit_icon = yes
+		trigger = {
+			is_wilderness_empire = yes
+			is_nomadic = no
+		}
+		# see 'wilderness.500'
+	}
+
+	ai_weight = {
+		factor = 1000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		empire_size_colonies_mult = -0.25
+		megastructures_arkships_cost_mult = -0.05
+		starbase_arkship_upgrades_cost_mult = -0.10
+	}
+}
+
+tr_expansion_courier_network = {
+	possible = {
+		has_tradition = tr_expansion_reach_for_the_stars
+	}
+
+	triggered_modifier = {
+		potential = {
+			is_nomadic = no
+		}
+		empire_size_systems_mult = -0.15
+		empire_size_colonies_mult = -0.15
+	}
+
+	triggered_modifier = {
+		potential = {
+			is_nomadic = yes
+		}
+		starbase_stockpile_capacity_mult = 0.25
+		ship_starbase_stockpile_collection_rate_mult = 0.25
+	}
+
+	tradition_swap = {
+		name = tr_expansion_courier_network_machine
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_machine_empire = yes
+			is_nomadic = no
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_courier_network_hive
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_hive_empire = yes
+			is_nomadic = no
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_courier_network_wilderness
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_wilderness_empire = yes
+			is_nomadic = no
+		}
+
+		weight = {
+			factor = 2
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_courier_network_nomad
+		inherit_effects = yes
+		inherit_icon = no
+		trigger = {
+			is_gestalt = no
+			is_nomadic = yes
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_courier_network_machine_nomad
+		inherit_effects = yes
+		inherit_icon = no
+		trigger = {
+			is_machine_empire = yes
+			is_nomadic = yes
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_courier_network_hive_nomad
+		inherit_effects = yes
+		inherit_icon = no
+		trigger = {
+			is_hive_empire = yes
+			is_nomadic = yes
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	ai_weight = {
+		factor = 5000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		starbase_stockpile_capacity_mult = 0.25
+		ship_starbase_stockpile_collection_rate_mult = 0.25
+	}
+}
+
+tr_expansion_reach_for_the_stars = {
+	triggered_modifier = {
+		potential = {
+			is_nomadic = no
+		}
+		country_starbase_influence_cost_mult = -0.10
+	}
+
+	triggered_modifier = {
+		potential = {
+			is_nomadic = yes
+		}
+		megastructures_waystations_cost_mult = -0.10
+		starbase_waystations_cost_mult = -0.10
+	}
+
+	tradition_swap = {
+		name = tr_expansion_reach_for_the_stars_machine
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_machine_empire = yes
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_expansion_reach_for_the_stars_hive
+		inherit_effects = yes
+		inherit_icon = yes
+		trigger = {
+			is_hive_empire = yes
+		}
+
+		weight = {
+			factor = 1
+		}
+	}
+
+	ai_weight = {
+		factor = 1000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		megastructures_waystations_cost_mult = -0.10
+		starbase_waystations_cost_mult = -0.10
+	}
+}
+
+tr_mercantile_adopt = {
+	unlocks_agenda = agenda_open_markets
+	modifier = {
+		planet_traders_upkeep_mult = -0.2
+	}
+
+	tradition_swap = {
+		name = tr_mercantile_nomads_adopt
+		inherit_icon = yes
+		inherit_name = yes
+		trigger = {
+			is_nomadic = yes
+		}
+		modifier = {
+			planet_traders_upkeep_mult = -0.1
+			nomadic_contract_value_mult = 0.15
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		nomadic_contract_value_mult = 0.15
+	}
+}
+
+tr_prosperity_adopt = {
+	unlocks_agenda = agenda_favored_society
+	modifier = {
+		station_gatherers_produces_mult = 0.20
+	}
+
+	tradition_swap = {
+		name = tr_prosperity_adopt_nomad
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+			is_eager_explorer_empire = no
+		}
+		modifier = {
+			arkship_harvest_resources_produces_mult = 0.10
+			starbase_stockpile_capacity_mult = 0.25
+			shipsize_nomads_constructor_stockpile_capacity_mult = 0.25
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_prosperity_adopt_nomad_eager_explorer
+		inherit_icon = yes
+		inherit_effects = no
+		trigger = {
+			is_nomadic = yes
+			is_eager_explorer_empire = yes
+		}
+		modifier = {
+			arkship_harvest_resources_produces_mult = 0.10
+			starbase_stockpile_capacity_mult = 0.25
+			shipsize_nomads_constructor_stockpile_capacity_mult = 0.25
+			shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.25
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	triggered_modifier = {
+		potential = {
+			afse_is_settled_arkship_empire = yes
+			is_eager_explorer_empire = no
+		}
+		arkship_harvest_resources_produces_mult = 0.10
+		starbase_stockpile_capacity_mult = 0.25
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.25
+	}
+
+	triggered_modifier = {
+		potential = {
+			afse_is_settled_arkship_empire = yes
+			is_eager_explorer_empire = yes
+		}
+		arkship_harvest_resources_produces_mult = 0.10
+		starbase_stockpile_capacity_mult = 0.25
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.25
+		shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.25
+	}
+}
+
+tr_prosperity_finish = {
+	modifier = {
+		stations_produces_mult = 0.25
+		ascension_perks_add = 1
+	}
+
+	tradition_swap = {
+		name = tr_prosperity_finish_nomad
+		inherit_icon = yes
+		trigger = {
+			is_nomadic = yes
+		}
+		modifier = {
+			arkship_harvest_resources_produces_mult = 0.15
+			ascension_perks_add = 1
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		arkship_harvest_resources_produces_mult = 0.15
+	}
+}
+
+tr_prosperity_public_works = {
+	possible = {
+		has_tradition = tr_prosperity_sct
+	}
+	custom_tooltip = tr_prosperity_public_works_desc
+
+	tradition_swap = {
+		name = tr_prosperity_extended_hives
+		custom_tooltip = tr_prosperity_extended_hives_desc
+		inherit_icon = yes
+		trigger = {
+			is_hive_empire = yes
+			has_void_dweller_origin = no
+			is_wilderness_empire = no
+			is_nomadic = no
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_prosperity_optimized_nexus
+		custom_tooltip = tr_prosperity_optimized_nexus_desc
+		trigger = {
+			is_machine_empire = yes
+			has_void_dweller_origin = no
+			is_nomadic = no
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_prosperity_void_works
+		inherit_icon = yes
+		custom_tooltip_with_modifiers = tr_prosperity_void_works_desc
+
+		# Effects are implemented in 03_habitat_districts.txt
+
+		modifier = {
+			habitat_max_districts_add = 1
+		}
+
+		trigger = {
+			has_void_dweller_origin = yes
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_prosperity_public_works_nomads
+		inherit_icon = yes
+		custom_tooltip_with_modifiers = tr_prosperity_public_works_nomads_desc
+		# Effects are implemented in 07_ark_districts.txt
+		trigger = {
+			is_nomadic = yes
+		}
+		modifier = {
+			planet_artificial_max_districts_add = 1
+		}
+		weight = {
+			factor = 1
+		}
+	}
+
+	tradition_swap = {
+		name = tr_prosperity_public_works_wilderness
+		custom_tooltip = tr_prosperity_public_works_wilderness_desc
+		inherit_icon = yes
+		trigger = {
+			is_wilderness_empire = yes
+		}
+		weight = {
+			factor = 2
+		}
+	}
+
+	ai_weight = {
+		factor = 5000
+	}
+
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		planet_artificial_max_districts_add = 1
+	}
+}
