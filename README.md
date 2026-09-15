@@ -26,26 +26,9 @@ After researching the appropriate technologies, regular construction ships belon
 
 Nomadic empires retain their vanilla technology requirements and continue constructing new Arkships from existing Arkships.
 
-## Waystations for Settled Empires
+## Nomadic Infrastructure
 
-**Two Paths, One Destiny** grants the foundational **Waystation** technology and allows regular construction ships belonging to Settled empires to construct Waystations. The second- and third-tier Waystation technologies can then be researched normally.
-
-Settled empires receive Waystation tier upgrades and stockpile improvements. These technologies do not increase their Starbase Capacity, so each Waystation uses the empire's existing capacity. They do, however, retain the vanilla Logistics Ship limit progression described below. Nomadic empires retain all vanilla technology effects.
-
-## Logistics Ships for Settled Empires
-
-**Two Paths, One Destiny** allows a Settled empire to build **Logistics Ships** at ordinary starbase shipyards and grants a base limit of **2** ships. Eager Explorer empires use the **Logistics Vessel** variant. Both variants share the same limit.
-
-Logistics Ships can harvest resources, perform construction tasks and interact with Waystation stockpiles. The normal FTL technology requirement still applies and is already fulfilled by ordinary spacefaring Settled empires.
-
-The limit progresses as follows:
-
-- **Two Paths, One Destiny: +2**;
-- **Waystation II: +2**;
-- **Waystation III: +2**;
-- each **Logistics Hub** module on a Waystation: **+1**.
-
-**Zero-G Engineering** is not a separate researchable technology. It is the Nomadic version of the starting `tech_space_construction` technology. The mod therefore applies its **+2 Logistics Ship limit** directly through **Two Paths, One Destiny**. The perk also automatically grants `tech_waystation_1` if necessary.
+Waystations, their technology chain and Logistics Ships remain exclusive to Nomadic empires. **Two Paths, One Destiny** does not unlock them or grant any effects affecting their limits, costs, upkeep or stockpile capacity. Existing Waystations and Logistics Ships are still handled by the normal settlement conversion rules when a Nomadic empire becomes Settled.
 
 ## Two Paths, One Destiny and Ascension Perks
 
@@ -56,18 +39,8 @@ Settled empires with **Two Paths, One Destiny** receive the Nomadic bonuses of t
 - **Imperial Prerogative**:
   - **Ruler Pop Output: +15%**.
 - **Eternal Vigilance**:
-  - **Waystation Armor Hardening: +25%**;
-  - **Waystation Shield Hardening: +15%**;
-  - **Waystation Hull Points: +25%**;
-  - **Waystation Alloy Cost: -25%**;
   - **Arkship Fire Rate: +25%**;
   - **Ship Hull Points: +25%**.
-
-- **Interstellar Dominion**:
-  - **Waystation Influence Cost: -20%**;
-  - **Starbase Stockpile Capacity: +15%**;
-  - **Nomadic Construction Ship Stockpile Capacity: +15%**;
-  - **Engineer Vessel Stockpile Capacity: +15%** for Eager Explorers.
 - **Mastery of Nature**:
   - **Arkship Harvested Resources: +50%**;
   - **Ship and Starbase Stockpile Collection Rate: +10%**.
@@ -87,24 +60,18 @@ The regular Settled effects of these traditions remain intact. With **Two Paths,
 
 - **Adaptability**:
   - **Survival of the Fittest**: Arkship Hull Points **+25%**;
-  - **Adaptive Ecology**: Max Districts on Artificial Worlds **+1**;
-  - **Appropriation**: Starbase Module Cost **-30%**.
-- **Diplomacy — Entente Coordination**: Nomadic Contract Value **+25%**.
-- **Discovery — Databank Uplinks**: Physics, Society and Engineering Research collected from systems by starbases **+20%**.
+  - **Adaptive Ecology**: Max Districts on Artificial Worlds **+1**.
 - **Domestication — Bio-Repurposing**:
   - Tiyanki and Amoeba Food production **+1**;
   - Crystalline Entity and Cutholoid Mineral production **+1**;
   - Voidworm Energy production **+1**.
-- **Enmity adoption**: Logistic Growth and Pop Assembly Speed **+3% per rival**.
+- **Enmity adoption**: Pop Assembly Speed **+3% per rival**.
 - **Expansion**:
-  - adoption: Megastructure Build Speed **+25%**, Waystation and Waystation Module Upkeep **-20%**;
+  - adoption: Megastructure Build Speed **+25%**;
   - **Colonization Fever**: Empire Size from Colonies **-25%**, Arkship Cost **-5%**, Arkship Upgrade Cost **-10%**;
-  - **Courier Network**: Starbase Stockpile Capacity **+25%**, Ship and Starbase Stockpile Collection Rate **+25%**;
-  - **Reach for the Stars**: Waystation Cost **-10%**;
   - finisher: Max Districts on Artificial Worlds **+1**.
-- **Commerce adoption**: Nomadic Contract Value **+15%**.
 - **Prosperity**:
-  - adoption: Arkship Harvested Resources **+10%**, Starbase and Logistics Ship Stockpile Capacity **+25%**;
+  - adoption: Arkship Harvested Resources **+10%**;
   - **Public Works Division**: Max Districts on Artificial Worlds **+1**, and every Arkship city district provides **+250 Housing**;
   - finisher: Arkship Harvested Resources **+15%**.
 
@@ -198,12 +165,9 @@ This mod overrides the following vanilla technology IDs:
 - `tech_arkship_planetary_refinery`;
 - `tech_arkship_stellar_igniter`;
 - `tech_arkship_system_scanner`;
-- `tech_arkship_exodus_jump`;
-- `tech_waystation_1`;
-- `tech_waystation_2`;
-- `tech_waystation_3`.
+- `tech_arkship_exodus_jump`.
 
-It also overrides the six Ascension Perks and sixteen tradition objects listed in the compatibility section, the two Logistics Ship sizes, their shared limit, the Arkship city district, the `nomads.4720` Wanderlust exploration event, and the scripted action `arkship_settle`.
+It also overrides the affected Ascension Perks and tradition objects listed in the compatibility section, the Arkship city district, the `nomads.4720` Wanderlust exploration event, and the scripted action `arkship_settle`.
 
 Because these objects deliberately retain their vanilla IDs, Stellaris can write expected messages such as the following to `error.log` (the complete object list is in the compatibility section):
 
@@ -219,9 +183,6 @@ Because these objects deliberately retain their vanilla IDs, Stellaris can write
 [game_singleobjectdatabase.h:170]: Object with key: tech_arkship_stellar_igniter already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 366
 [game_singleobjectdatabase.h:170]: Object with key: tech_arkship_system_scanner already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 413
 [game_singleobjectdatabase.h:170]: Object with key: tech_arkship_exodus_jump already exists, using the one at  file: common/technology/afse_arkship_technologies.txt line: 473
-[game_singleobjectdatabase.h:170]: Object with key: tech_waystation_1 already exists, using the one at  file: common/technology/afse_waystation_technologies.txt line: 3
-[game_singleobjectdatabase.h:170]: Object with key: tech_waystation_2 already exists, using the one at  file: common/technology/afse_waystation_technologies.txt line: 48
-[game_singleobjectdatabase.h:170]: Object with key: tech_waystation_3 already exists, using the one at  file: common/technology/afse_waystation_technologies.txt line: 147
 [game_singleobjectdatabase.h:170]: Object with key: ap_wanderlust already exists, using the one at  file: common/ascension_perks/afse_ascension_perks.txt line: 39
 [game_singleobjectdatabase.h:170]: Object with key: ap_interstellar_dominion already exists, using the one at  file: common/ascension_perks/afse_ascension_perks.txt line: 137
 [game_singleobjectdatabase.h:170]: Object with key: ap_mastery_of_nature already exists, using the one at  file: common/ascension_perks/afse_ascension_perks.txt line: 223
@@ -239,7 +200,7 @@ A full game restart is recommended after installing or updating the mod.
 
 The mod changes definitions originating from the following vanilla files:
 
-- `common/technology/00_nomads_dlc_tech.txt`: `tech_planetary_engineering`, the Arkship technology chain and `tech_waystation_1` through `tech_waystation_3`;
+- `common/technology/00_nomads_dlc_tech.txt`: `tech_planetary_engineering` and the Arkship technology chain;
 - `common/ascension_perks/00_ascension_perks.txt`: `ap_imperial_prerogative`, `ap_eternal_vigilance`, `ap_wanderlust`, `ap_interstellar_dominion`, `ap_mastery_of_nature` and `ap_voidborn`;
 - `common/traditions/00_adaptability.txt`: `tr_adaptability_survival_fittest`, `tr_adaptability_adaptive_ecology`, `tr_adaptability_appropriation`;
 - `common/traditions/00_diplomacy.txt`: `tr_diplomacy_entente_coordination`;
@@ -249,15 +210,12 @@ The mod changes definitions originating from the following vanilla files:
 - `common/traditions/00_expansion.txt`: `tr_expansion_adopt`, `tr_expansion_finish`, `tr_expansion_colonization_fever`, `tr_expansion_courier_network`, `tr_expansion_reach_for_the_stars`;
 - `common/traditions/00_mercantile.txt`: `tr_mercantile_adopt`;
 - `common/traditions/00_prosperity.txt`: `tr_prosperity_adopt`, `tr_prosperity_finish`, `tr_prosperity_public_works`;
-- `common/ship_sizes/29_nomads_dlc_ships.txt`: `nomads_constructor`, `nomads_engineer_vessel`;
-- `common/country_limits/ship_of_size_limits/00_ship_of_size_limits.txt`: `nomadic_constructor_limit`;
 - `common/districts/07_ark_districts.txt`: `district_ark_city`;
 - `common/scripted_actions/03_arkships.txt`: `arkship_settle`;
 - `common/game_rules/00_rules.txt`: `can_nomad_settle`;
 - `common/inline_scripts/megastructures/arkship.txt`: full relative-path override;
-- `common/megastructures/30_nomad_waystation.txt`: full relative-path override of `waystation_megastructure`;
 - `events/nomads_events_1.txt`: `nomads.4720`.
 
-Objects with vanilla IDs are overridden by identifier. The Arkship inline script and Waystation megastructure file are full overrides at their original relative paths. The mod also adds `afse` events, triggers, effects, values, modifiers and on-actions for settlement, colonization, migration and Settled Arkship Empire Size accounting.
+Objects with vanilla IDs are overridden by identifier. The Arkship inline script is a full override at its original relative path. The mod also adds `afse` events, triggers, effects, values, modifiers and on-actions for settlement, colonization, migration and Settled Arkship Empire Size accounting.
 
 Mods that replace any listed technology, Ascension Perk, tradition, ship size, ship limit, Arkship district, Waystation construction, the **Settle** order or Nomadic settlement rules may be incompatible. For identifier overrides, whichever definition loads last wins.

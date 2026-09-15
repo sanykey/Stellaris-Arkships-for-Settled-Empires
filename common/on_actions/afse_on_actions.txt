@@ -5,7 +5,6 @@ afse_on_arkship_settle = {
 on_monthly_pulse_country = {
 	events = {
 		afse.10
-		afse.30
 		afse.31
 	}
 }

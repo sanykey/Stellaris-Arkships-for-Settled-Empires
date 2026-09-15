@@ -1,7 +1,7 @@
 ﻿l_english:
  ap_afse_arkship_continuity: "Two Paths, One Destiny"
  ap_afse_arkship_continuity_desc: "Our worlds may anchor our civilization, but they need not bind it. The traditions, industries and institutions of the Arkships shall endure alongside our planetary society."
- afse_arkship_continuity_effects: "Unlocks Arkship and Waystation technologies and construction for Settled empires. Retains special Arkship and Nomadic effects from completed traditions and Ascension Perks. Settled empires may order an Arkship to settle a planet, leaving Arkship Remains that grant §G+60%§! Habitability and §G+2§! Max Districts. Allows Nomadic empires to settle without relinquishing their remaining Arkships."
+ afse_arkship_continuity_effects: "Unlocks Arkship technologies and construction for Settled empires. Retains special Arkship effects from completed traditions and Ascension Perks. Settled empires may order an Arkship to settle a planet, leaving Arkship Remains that grant §G+60%§! Habitability and §G+2§! Max Districts. Allows Nomadic empires to settle without relinquishing their remaining Arkships."
  afse_requires_adaptability_or_versatility: "$TRIGGER_FAIL$Requires completion of the §YAdaptability§! or §YVersatility§! tradition tree."
  afse_requires_arkship_continuity: "$TRIGGER_FAIL$Requires the §Y$ap_afse_arkship_continuity$§! Ascension Perk."
  afse_settle_keep_arkships: "We shall make our home here, but our Arkships will sail on."

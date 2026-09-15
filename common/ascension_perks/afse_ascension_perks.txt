@@ -1,11 +1,6 @@
 # Vanilla Ascension Perks with their Nomadic bonuses retained by Arkship-capable settled empires.
 
 ap_afse_arkship_continuity = {
-	modifier = {
-		# Replicate the Logistic Ship limit from the Nomadic Zero-G Engineering swap.
-		nomadic_constructor_limit_add = 2
-	}
-
 	possible = {
 		custom_tooltip = {
 			fail_text = "requires_ascension_perks_3"
@@ -27,15 +22,6 @@ ap_afse_arkship_continuity = {
 
 	on_enabled = {
 		custom_tooltip = afse_arkship_continuity_effects
-		if = {
-			limit = {
-				NOT = { has_technology = tech_waystation_1 }
-			}
-			give_technology = {
-				tech = tech_waystation_1
-				message = yes
-			}
-		}
 	}
 
 	ai_weight = { factor = 10 }
@@ -169,27 +155,6 @@ ap_interstellar_dominion = {
 		shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
 		shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.15
 		add_attunement_the_eater_of_worlds = @ascension_perk_attunement1
-	}
-
-	triggered_modifier = {
-		potential = {
-			afse_is_settled_arkship_empire = yes
-			is_eager_explorer_empire = no
-		}
-		megastructures_waystations_influence_cost_mult = -0.20
-		starbase_stockpile_capacity_mult = 0.15
-		shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
-	}
-
-	triggered_modifier = {
-		potential = {
-			afse_is_settled_arkship_empire = yes
-			is_eager_explorer_empire = yes
-		}
-		megastructures_waystations_influence_cost_mult = -0.20
-		starbase_stockpile_capacity_mult = 0.15
-		shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
-		shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.15
 	}
 
 	potential = {
