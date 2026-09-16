@@ -1,0 +1,30 @@
+starbase_level_afse_waystation_1 = {
+	starbase_capacity_used = 0
+	picture = "GFX_waystation_background"
+	ship_size = starbase_waystation_1
+	next_level = starbase_level_afse_waystation_2
+	level_weight = 0
+	ai_weight = { weight = 1 }
+	can_always_dismantle = yes
+	show_in_outliner = yes
+	module_slots = { 1 2 }
+}
+
+starbase_level_afse_waystation_2 = {
+	starbase_capacity_used = 0
+	picture = "GFX_waystation_background"
+	ship_size = starbase_waystation_2
+	next_level = starbase_level_afse_waystation_3
+	level_weight = 2
+	ai_weight = { weight = 3 }
+	module_slots = { 1 2 3 4 }
+}
+
+starbase_level_afse_waystation_3 = {
+	starbase_capacity_used = 0
+	picture = "GFX_waystation_background"
+	ship_size = starbase_waystation_3
+	level_weight = 3
+	ai_weight = { weight = 5 }
+	module_slots = { 1 2 3 4 5 6 }
+}

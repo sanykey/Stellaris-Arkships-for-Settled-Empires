@@ -1,0 +1,6 @@
+spriteTypes = {
+	spriteType = {
+		name = "GFX_afse_settled_waystation_megastructure_build_icon"
+		textureFile = "gfx/interface/icons/megastructures/megastructures_build_menu/build_menu_waystation.dds"
+	}
+}

@@ -1,5 +1,24 @@
 namespace = afse
 
+# Scope = Country
+country_event = {
+	id = afse.30
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_ascension_perk = ap_afse_arkship_continuity
+		NOT = { has_technology = tech_waystation_1 }
+	}
+
+	immediate = {
+		give_technology = {
+			tech = tech_waystation_1
+			message = no
+		}
+	}
+}
+
 # Scope: Country
 country_event = {
 	id = afse.31

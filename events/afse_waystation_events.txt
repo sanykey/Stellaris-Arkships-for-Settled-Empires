@@ -1,0 +1,300 @@
+namespace = afse
+
+# Scope: country (new system owner)
+# From: system
+# FromFrom: country (previous system owner)
+country_event = {
+	id = afse.44
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			any_fleet_in_system = {
+				has_fleet_flag = afse_settled_waystation
+				owner = { is_nomadic = no }
+			}
+		}
+	}
+
+	immediate = {
+		save_event_target_as = afse_new_system_owner
+		from = {
+			every_fleet_in_system = {
+				limit = {
+					has_fleet_flag = afse_settled_waystation
+					owner = { is_nomadic = no }
+				}
+				owner = {
+					save_event_target_as = afse_waystation_owner
+				}
+				if = {
+					limit = {
+						event_target:afse_new_system_owner = {
+							has_closed_borders = event_target:afse_waystation_owner
+						}
+					}
+					delete_fleet = this
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = afse.40
+	hide_window = yes
+	is_triggered_only = yes
+
+	# this = country enforcing its borders
+	# from = country whose fleet is being expelled
+	# fromfrom = fleet inside the closed borders
+	# fromfromfrom = system containing the fleet
+	trigger = {
+		fromfrom = {
+			has_fleet_flag = afse_settled_waystation
+			owner = { is_nomadic = no }
+		}
+	}
+
+	immediate = {
+		fromfrom = { delete_fleet = this }
+	}
+}
+
+# Scope: country
+country_event = {
+	id = afse.41
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			afse_is_settled_arkship_empire = yes
+			has_modifier = afse_settled_waystation_capacity
+		}
+	}
+
+	immediate = {
+		remove_modifier = afse_settled_waystation_capacity
+		set_variable = { which = afse_waystation_count value = 0 }
+		set_variable = { which = afse_waystation_limit value = 3 }
+		set_variable = { which = afse_waystation_limit_base value = 3 }
+		set_variable = { which = afse_waystation_limit_tech_1 value = 0 }
+		set_variable = { which = afse_waystation_limit_tech_2 value = 0 }
+		set_variable = { which = afse_waystation_limit_tech_3 value = 0 }
+		set_variable = { which = afse_waystation_limit_mega_engineering value = 0 }
+		set_variable = { which = afse_waystation_limit_stellar_expansion value = 0 }
+		set_variable = { which = afse_waystation_limit_manifest_destiny value = 0 }
+		set_variable = { which = afse_waystation_limit_grasp_the_void value = 0 }
+		set_variable = { which = afse_waystation_limit_unyielding_adopt value = 0 }
+		set_variable = { which = afse_waystation_limit_fortress_doctrine value = 0 }
+		set_variable = { which = afse_waystation_limit_galactic_ambition_percent value = 0 }
+
+		if = {
+			limit = { afse_is_settled_arkship_empire = yes }
+			if = {
+				limit = { has_technology = tech_waystation_1 }
+				set_variable = { which = afse_waystation_limit_tech_1 value = 2 }
+				change_variable = { which = afse_waystation_limit value = 2 }
+			}
+			if = {
+				limit = { has_technology = tech_waystation_2 }
+				set_variable = { which = afse_waystation_limit_tech_2 value = 4 }
+				change_variable = { which = afse_waystation_limit value = 4 }
+			}
+			if = {
+				limit = { has_technology = tech_waystation_3 }
+				set_variable = { which = afse_waystation_limit_tech_3 value = 6 }
+				change_variable = { which = afse_waystation_limit value = 6 }
+			}
+			if = {
+				limit = { has_technology = tech_mega_engineering }
+				set_variable = { which = afse_waystation_limit_mega_engineering value = 3 }
+				change_variable = { which = afse_waystation_limit value = 3 }
+			}
+			if = {
+				limit = { has_technology = tech_galactic_ambitions }
+				set_variable = { which = afse_waystation_limit_stellar_expansion value = 2 }
+				change_variable = { which = afse_waystation_limit value = 2 }
+			}
+			if = {
+				limit = { has_technology = tech_manifest_destiny }
+				set_variable = { which = afse_waystation_limit_manifest_destiny value = 2 }
+				change_variable = { which = afse_waystation_limit value = 2 }
+			}
+			if = {
+				limit = { has_ascension_perk = ap_grasp_the_void }
+				set_variable = { which = afse_waystation_limit_grasp_the_void value = 5 }
+				change_variable = { which = afse_waystation_limit value = 5 }
+			}
+			if = {
+				limit = { has_tradition = tr_unyielding_adopt }
+				set_variable = { which = afse_waystation_limit_unyielding_adopt value = 2 }
+				change_variable = { which = afse_waystation_limit value = 2 }
+			}
+			if = {
+				limit = { has_tradition = tr_unyielding_fortress_doctrine }
+				set_variable = { which = afse_waystation_limit_fortress_doctrine value = 2 }
+				change_variable = { which = afse_waystation_limit value = 2 }
+			}
+			if = {
+				limit = { has_tradition = tr_expansion_galactic_ambition }
+				set_variable = { which = afse_waystation_limit_galactic_ambition_percent value = 50 }
+				set_variable = {
+					which = afse_waystation_limit_percentage_bonus
+					value = afse_waystation_limit
+				}
+				multiply_variable = {
+					which = afse_waystation_limit_percentage_bonus
+					value = 0.5
+				}
+				floor_variable = afse_waystation_limit_percentage_bonus
+				change_variable = {
+					which = afse_waystation_limit
+					value = afse_waystation_limit_percentage_bonus
+				}
+				clear_variable = afse_waystation_limit_percentage_bonus
+			}
+
+			every_owned_fleet = {
+				limit = { has_fleet_flag = afse_settled_waystation }
+				root = {
+					change_variable = { which = afse_waystation_count value = 1 }
+				}
+			}
+			every_owned_megastructure = {
+				limit = { is_megastructure_type = afse_settled_waystation_megastructure }
+				root = {
+					change_variable = { which = afse_waystation_count value = 1 }
+				}
+			}
+
+			add_modifier = {
+				modifier = afse_settled_waystation_capacity
+				days = -1
+			}
+		}
+	}
+}
+
+# Scope: country
+country_event = {
+	id = afse.42
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		afse_is_settled_arkship_empire = yes
+		any_owned_nonprimary_starbase = {
+			is_waystation_starbase = yes
+			fleet = { has_fleet_flag = afse_settled_waystation }
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = { NOT = { is_variable_set = observation_post_insight } }
+			set_variable = { which = observation_post_insight value = 0 }
+		}
+
+		if = {
+			limit = {
+				NOR = {
+					has_country_flag = society_insights
+					has_country_flag = engineering_insights
+					has_country_flag = physics_insights
+					has_country_flag = pending_insight_tech
+				}
+			}
+
+			set_variable = { which = afse_waystation_observation_insight value = 0 }
+			save_event_target_as = afse_pre_ftl_observer
+			every_owned_nonprimary_starbase = {
+				limit = {
+					is_waystation_starbase = yes
+					fleet = { has_fleet_flag = afse_settled_waystation }
+				}
+				solar_system = {
+					every_system_planet = {
+						limit = {
+							has_observation_outpost = no
+							exists = owner
+							owner = {
+								is_primitive = yes
+								has_awareness < 100
+								NOT = { has_country_flag = solarpunk_country }
+							}
+						}
+						event_target:afse_pre_ftl_observer = {
+							change_variable = {
+								which = afse_waystation_observation_insight
+								value = 0.5
+							}
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					check_variable = {
+						which = afse_waystation_observation_insight
+						value > 0
+					}
+				}
+				if = {
+					limit = {
+						count_situation = {
+							limit = { is_situation_type = situation_observation_insight }
+							count = 0
+						}
+					}
+					start_situation = {
+						type = situation_observation_insight
+						target = this
+						effect = {
+							owner = {
+								prev = { set_situation_approach = approach_study_insights }
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				has_country_flag = pending_insight_tech
+				NOR = {
+					has_country_flag = society_insights
+					has_country_flag = engineering_insights
+					has_country_flag = physics_insights
+				}
+			}
+			if = {
+				limit = { has_all_physics_insights = no }
+				set_country_flag = physics_insights
+			}
+			else_if = {
+				limit = { has_all_society_insights = no }
+				set_country_flag = society_insights
+			}
+			else_if = {
+				limit = { has_all_engineering_insights = no }
+				set_country_flag = engineering_insights
+			}
+			random_owned_nonprimary_starbase = {
+				limit = {
+					is_waystation_starbase = yes
+					fleet = { has_fleet_flag = afse_settled_waystation }
+				}
+				save_event_target_as = afse_outpost_placeholder
+			}
+			add_observation_insight_effect = {
+				VALUE = 0
+				OUTPOST = event_target:afse_outpost_placeholder
+			}
+		}
+	}
+}

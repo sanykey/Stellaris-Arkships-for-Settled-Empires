@@ -1,0 +1,56 @@
+afse_logistic_drop_off_at_colony = {
+	user_scope = fleet
+	scope = planet
+
+	automation = {
+		priority = 4
+		default_on = yes
+		tooltip = afse_logistic_drop_off_at_colony_automation_tt
+	}
+
+	possible = {
+		is_colony = yes
+		owner = {
+			is_same_value = from.controller
+			afse_is_settled_arkship_empire = yes
+		}
+		from = {
+			any_owned_ship = {
+				used_stockpile_capacity_percentage > 0
+			}
+		}
+	}
+
+	on_completed = afse_on_logistic_drop_off_at_colony
+
+	hide_from_context_menu = { always = yes }
+	button_visible = { always = no }
+	button_clickable = { always = yes }
+
+	activity_key = logistic_drop_off_stockpile
+
+	ai = {
+		weight = {
+			base = @ai_action_weight_1
+			modifier = {
+				factor = @ai_action_weight_15
+				from = {
+					any_owned_ship = {
+						used_stockpile_capacity_percentage >= 0.5
+					}
+				}
+			}
+			modifier = {
+				factor = @ai_action_weight_9999
+				from = {
+					any_owned_ship = {
+						used_stockpile_capacity_percentage >= 0.95
+					}
+				}
+			}
+		}
+		max_jumps = 10
+		good_enough_weight = @ai_action_weight_1
+		ai_minister = interior
+	}
+}

@@ -1,0 +1,22 @@
+namespace = afse
+
+# Scope: planet (target colony)
+# From: fleet (Logistics Ship fleet)
+planet_event = {
+	id = afse.43
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		from.controller = {
+			save_event_target_as = afse_logistics_recipient
+		}
+		from = {
+			every_owned_ship = {
+				transfer_resource_stockpile = {
+					target = event_target:afse_logistics_recipient
+				}
+			}
+		}
+	}
+}

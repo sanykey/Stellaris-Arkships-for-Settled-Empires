@@ -49,3 +49,29 @@ afse_settled_empire_arkship_colonization_effect = {
 		}
 	}
 }
+
+# Scope: planet (pre-FTL capital).
+# $EVENT_ID$: country event sent to an eligible Waystation owner.
+fire_country_event_to_nomad_waystation_preftl_observers = {
+	if = {
+		limit = { has_observation_outpost = no }
+		solar_system = {
+			random_starbase_in_system = {
+				limit = {
+					is_waystation_starbase = yes
+					OR = {
+						owner? = { is_nomadic = yes }
+						AND = {
+							owner? = { afse_is_settled_arkship_empire = yes }
+							fleet = { has_fleet_flag = afse_settled_waystation }
+						}
+					}
+				}
+				save_event_target_as = nomad_waystation_observer
+				owner = {
+					country_event = { id = $EVENT_ID$ random = 25 }
+				}
+			}
+		}
+	}
+}

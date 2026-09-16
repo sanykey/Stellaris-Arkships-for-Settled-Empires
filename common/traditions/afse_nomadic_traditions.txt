@@ -158,6 +158,10 @@ tr_adaptability_appropriation = {
 		factor = 1000
 	}
 
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		starbase_modules_cost_mult = -0.30
+	}
 }
 
 tr_diplomacy_entente_coordination = {
@@ -191,6 +195,10 @@ tr_diplomacy_entente_coordination = {
 		factor = 1000
 	}
 
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		nomadic_contract_value_mult = 0.25
+	}
 }
 
 tr_discovery_databank_uplinks = {
@@ -227,6 +235,12 @@ tr_discovery_databank_uplinks = {
 		factor = 5000
 	}
 
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		starbase_collected_system_physics_research_mult = 0.20
+		starbase_collected_system_society_research_mult = 0.20
+		starbase_collected_system_engineering_research_mult = 0.20
+	}
 }
 
 tr_domestication_bio_repurposing = {
@@ -315,6 +329,7 @@ tr_enmity_adopt = {
 
 	triggered_modifier = {
 		potential = { afse_is_settled_arkship_empire = yes }
+		logistic_growth_mult = 0.03
 		planet_pop_assembly_mult = 0.03
 		mult = trigger:num_rivals
 	}
@@ -352,6 +367,8 @@ tr_expansion_adopt = {
 	triggered_modifier = {
 		potential = { afse_is_settled_arkship_empire = yes }
 		megastructure_build_speed_mult = 0.25
+		starbase_waystations_upkeep_mult = -0.20
+		starbase_waystations_modules_upkeep_mult = -0.20
 	}
 }
 
@@ -588,6 +605,11 @@ tr_expansion_courier_network = {
 		factor = 5000
 	}
 
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		starbase_stockpile_capacity_mult = 0.25
+		ship_starbase_stockpile_collection_rate_mult = 0.25
+	}
 }
 
 tr_expansion_reach_for_the_stars = {
@@ -636,6 +658,11 @@ tr_expansion_reach_for_the_stars = {
 		factor = 1000
 	}
 
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		megastructures_waystations_cost_mult = -0.10
+		starbase_waystations_cost_mult = -0.10
+	}
 }
 
 tr_mercantile_adopt = {
@@ -660,6 +687,10 @@ tr_mercantile_adopt = {
 		}
 	}
 
+	triggered_modifier = {
+		potential = { afse_is_settled_arkship_empire = yes }
+		nomadic_contract_value_mult = 0.15
+	}
 }
 
 tr_prosperity_adopt = {
@@ -705,8 +736,24 @@ tr_prosperity_adopt = {
 	}
 
 	triggered_modifier = {
-		potential = { afse_is_settled_arkship_empire = yes }
+		potential = {
+			afse_is_settled_arkship_empire = yes
+			is_eager_explorer_empire = no
+		}
 		arkship_harvest_resources_produces_mult = 0.10
+		starbase_stockpile_capacity_mult = 0.25
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.25
+	}
+
+	triggered_modifier = {
+		potential = {
+			afse_is_settled_arkship_empire = yes
+			is_eager_explorer_empire = yes
+		}
+		arkship_harvest_resources_produces_mult = 0.10
+		starbase_stockpile_capacity_mult = 0.25
+		shipsize_nomads_constructor_stockpile_capacity_mult = 0.25
+		shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.25
 	}
 }
 

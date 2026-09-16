@@ -3,3 +3,8 @@ afse_settled_arkship_empire_size = {
 	custom_tooltip = afse_settled_arkship_empire_size_breakdown
 	show_only_custom_tooltip = yes
 }
+
+afse_settled_waystation_capacity = {
+	custom_tooltip = afse_settled_waystation_capacity_breakdown
+	show_only_custom_tooltip = yes
+}

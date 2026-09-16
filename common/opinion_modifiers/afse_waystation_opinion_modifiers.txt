@@ -1,0 +1,40 @@
+# Preserve the vanilla penalty and extend it to AFSE Waystations owned by Settled empires.
+opinion_unlicensed_waystations = {
+	min = -200
+	trigger = {
+		from = {
+			OR = {
+				is_nomadic = yes
+				afse_is_settled_arkship_empire = yes
+			}
+			any_owned_ship = {
+				is_waystation_ship = yes
+				OR = {
+					owner = { is_nomadic = yes }
+					fleet = { has_fleet_flag = afse_settled_waystation }
+				}
+				space_owner? = { is_same_value = root }
+				NOT = {
+					solar_system = {
+						has_star_flag = waystation_contract_system@this
+					}
+				}
+			}
+		}
+		NOT = {
+			benefits_from_waystation_network = {
+				NOMAD = from
+				SYSTEM_OWNER = root
+			}
+		}
+		NAND = {
+			root = { is_fallen_empire_spiritualist = yes }
+			from = { has_relic = r_severed_head }
+		}
+	}
+
+	opinion = {
+		base = -10
+		mult = value:num_waystations_in_country_opinion_scaled|OWNER|from|
+	}
+}

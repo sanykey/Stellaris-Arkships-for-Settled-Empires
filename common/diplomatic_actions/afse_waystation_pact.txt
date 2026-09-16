@@ -1,0 +1,488 @@
+action_form_waystation_pact = {
+	icon = "GFX_diplomacy_status_waystation_pact"
+	diplo_view_acceptance_icon = yes
+	should_notify_all_communications = no
+	should_show_auto_accept_message_recipient = yes
+	requires_actor_independence = no
+	requires_recipient_independence = no
+	AI_acceptance_base_value = 0
+	action_type = positive
+
+	potential = {
+		hidden_trigger = {
+			OR = {
+				# Preserve every vanilla pairing involving a Nomadic empire.
+				is_nomadic = yes
+				from = { is_nomadic = yes }
+				# Settled empires may form the pact if either side follows AFSE doctrine.
+				AND = {
+					is_nomadic = no
+					from = { is_nomadic = no }
+					OR = {
+						has_ascension_perk = ap_afse_arkship_continuity
+						from = { has_ascension_perk = ap_afse_arkship_continuity }
+					}
+				}
+			}
+			NOT = { has_waystation_pact = from }
+		}
+	}
+
+	possible = {
+		# Subject diplomacy check: restrict whichever party is nomadic
+		hidden_trigger = {
+			if = {
+				limit = { is_nomadic = yes }
+				NAND = {
+					is_subject = yes
+					any_agreement = {
+						has_term_value = {
+							term = subject_diplomacy
+							value = subject_can_not_do_diplomacy
+						}
+					}
+				}
+			}
+			if = {
+				limit = { from = { is_nomadic = yes } }
+				from = {
+					NAND = {
+						is_subject = yes
+						any_agreement = {
+							has_term_value = {
+								term = subject_diplomacy
+								value = subject_can_not_do_diplomacy
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "DIPLOMACY_STATUS_WAR"
+			NOT = { is_at_war_with = from }
+		}
+		custom_tooltip = {
+			fail_text = "requires_no_existing_waystation_pact"
+			NOT = { has_waystation_pact = from }
+		}
+		# Adjacent waystations required for nomad-to-nomad pacts
+		if = {
+			limit = {
+				is_nomadic = yes
+				from = { is_nomadic = yes }
+			}
+			custom_tooltip = {
+				fail_text = "requires_adjacent_waystations_fail"
+				any_owned_nonprimary_starbase = {
+					is_waystation_starbase = yes
+					solar_system = {
+						any_neighbor_system = {
+							any_fleet_in_system = {
+								is_waystation_ship = yes
+								owner? = {
+									is_same_value = from
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_actor_not_fanatic_purifiers"
+			OR = {
+				is_same_species = from
+				NOT = { has_valid_civic = civic_fanatic_purifiers }
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_recipient_not_fanatic_purifiers"
+			OR = {
+				is_same_species = from
+				from = { NOT = { has_valid_civic = civic_fanatic_purifiers } }
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_actor_not_devouring_swarm"
+			NOT = { has_valid_civic = civic_hive_devouring_swarm }
+		}
+		custom_tooltip = {
+			fail_text = "requires_recipient_not_devouring_swarm"
+			from = { NOT = { has_valid_civic = civic_hive_devouring_swarm } }
+		}
+		if = {
+			limit = { from = { has_valid_civic = civic_inwards_perfection } }
+			if = {
+				limit = {
+					has_intel = {
+						who = from
+						intel = civics
+					}
+				}
+				custom_tooltip = {
+					fail_text = requires_recipient_not_inward_perfection
+					always = no
+				}
+			}
+			else = {
+				custom_tooltip = {
+					fail_text = diplo_action_no_low_intel
+					always = no
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_actor_not_inward_perfection"
+			NOT = { has_valid_civic = civic_inwards_perfection }
+		}
+		custom_tooltip = {
+			fail_text = "requires_actor_not_machine_terminator"
+			OR = {
+				is_same_species = from
+				NOT = { has_civic = civic_machine_terminator }
+				AND = {
+					has_civic = civic_machine_terminator
+					from = {
+						OR = {
+							has_country_flag = synthetic_empire
+							is_machine_empire = yes
+							is_individual_machine = yes
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_recipient_not_machine_terminator"
+			OR = {
+				is_same_species = from
+				from = { NOT = { has_civic = civic_machine_terminator } }
+				AND = {
+					from = { has_civic = civic_machine_terminator }
+					OR = {
+						has_country_flag = synthetic_empire
+						is_machine_empire = yes
+						is_individual_machine = yes
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_actor_not_scorched_earth"
+			OR = {
+				is_genocidal_infernal = no
+				from = { is_infernal_empire = yes }
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_recipient_not_scorched_earth"
+			OR = {
+				is_infernal_empire = yes
+				from = { is_genocidal_infernal = no }
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_actor_not_khan"
+			NOT = { has_country_flag = heir_of_the_khan_khan }
+		}
+		custom_tooltip = {
+			fail_text = "requires_recipient_not_khan"
+			from = { NOT = { has_country_flag = heir_of_the_khan_khan } }
+		}
+		custom_tooltip = {
+			fail_text = "federation_actor_no_separate_treaties"
+			NOT = {
+				AND = {
+					has_federation = yes
+					federation = { has_federation_law = treaties_separate_no }
+					NOT = { federation = { any_member = { is_same_value = root.from } } }
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "federation_recipient_no_separate_treaties"
+			from = {
+				NOT = {
+					AND = {
+						has_federation = yes
+						federation = { has_federation_law = treaties_separate_no }
+						NOT = { federation = { any_member = { is_same_value = root } } }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				from = { has_valid_civic = civic_pompous_purists }
+				NOT = { root = { is_overlord_to = from } }
+			}
+			if = {
+				limit = {
+					has_intel = {
+						who = from
+						intel = civics
+					}
+				}
+				custom_tooltip = {
+					fail_text = requires_recipient_not_pompous
+					always = no
+				}
+			}
+			else = {
+				custom_tooltip = {
+					fail_text = diplo_action_no_low_intel
+					always = no
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = requires_20_trust_or_good
+			OR = {
+				opinion_level = {
+					who = from
+					level >= good
+				}
+				from = {
+					trust = {
+						who = root
+						value >= 20
+					}
+				}
+				AND = {
+					has_valid_civic = civic_hive_familiar_face
+					from = {
+						trust = {
+							who = root
+							value >= 10
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = requires_embassy_or_improving_relations
+			OR = {
+				is_improving_relations_with = from
+				has_embassy = from
+			}
+		}
+	}
+
+	should_ai_propose = {
+		weight = 5
+		# More likely to propose if we have waystations near the other empire's space
+		modifier = {
+			factor = 3
+			from = {
+				is_nomadic = yes
+				any_owned_nonprimary_starbase = {
+					is_waystation_starbase = yes
+					solar_system = {
+						any_neighbor_system = {
+							owner? = {
+								is_same_value = root
+							}
+						}
+					}
+				}
+			}
+		}
+		# More likely to propose if the other empire has waystations near our space
+		modifier = {
+			factor = 3
+			is_nomadic = no
+			from = {
+				is_nomadic = yes
+			}
+			any_system_within_border = {
+				any_neighbor_system = {
+					any_fleet_in_system = {
+						is_waystation_ship = yes
+						owner? = {
+							is_same_value = root.from
+						}
+					}
+				}
+			}
+		}
+		# More likely if both nomads have neighbouring waylines
+		modifier = {
+			factor = 3
+			is_nomadic = yes
+			from = {
+				is_nomadic = yes
+			}
+			any_owned_nonprimary_starbase = {
+				is_waystation_starbase = yes
+				has_neighboring_waystation = yes
+				solar_system = {
+					any_neighbor_system = {
+						any_fleet_in_system = {
+							is_waystation_ship = yes
+							owner? = {
+								is_same_value = root.from
+							}
+						}
+					}
+				}
+			}
+		}
+		# More likely if we already have good relations
+		modifier = {
+			factor = 2
+			opinion_level = {
+				who = from
+				level >= good
+			}
+		}
+		# Less likely if we have poor opinion
+		modifier = {
+			factor = 0.1
+			opinion_level = {
+				who = from
+				level <= poor
+			}
+		}
+		# Never propose to rivals
+		modifier = {
+			factor = 0
+			is_rival = from
+		}
+		# Never propose without an active embassy
+		modifier = {
+			factor = 0
+			NOT = { has_embassy = from }
+		}
+		# Less likely to propose if we are Void Reavers
+		modifier = {
+			factor = 0.1
+			root = {
+				has_civic = civic_void_reavers
+			}
+		}
+	}
+
+	ai_acceptance = {
+		# Base reluctance
+		modifier = {
+			add = -35
+			desc = BASE_RELUCTANCE
+		}
+		# Opinion bonus (only the highest matching tier applies)
+		modifier = {
+			add = 15
+			opinion_level = {
+				who = from
+				level >= neutral
+			}
+			opinion_level = {
+				who = from
+				level < good
+			}
+			desc = OPINION_POSITIVE
+		}
+		modifier = {
+			add = 50
+			opinion_level = {
+				who = from
+				level >= good
+			}
+			opinion_level = {
+				who = from
+				level < excellent
+			}
+			desc = OPINION_POSITIVE
+		}
+		modifier = {
+			add = 75
+			opinion_level = {
+				who = from
+				level >= excellent
+			}
+			desc = OPINION_POSITIVE
+		}
+		# Trust bonus
+		modifier = {
+			add = 25
+			from = {
+				trust = {
+					who = root
+					value >= 25
+				}
+			}
+			desc = HIGH_TRUST
+		}
+		# Existing diplomatic agreements
+		modifier = {
+			add = 20
+			OR = {
+				has_commercial_pact = from
+				has_research_agreement = from
+				has_non_aggression_pact = from
+				has_defensive_pact = from
+				is_guaranteeing = from
+			}
+			desc = EXISTING_AGREEMENTS
+		}
+		# Both members of the Galactic Community
+		modifier = {
+			add = 25
+			is_galactic_community_member = yes
+			from = {
+				is_galactic_community_member = yes
+			}
+			desc = GALACTIC_COMMUNITY_MEMBERS
+		}
+		# Already have neighboring waystations (mutual benefit)
+		modifier = {
+			add = 25
+			from = {
+				is_nomadic = yes
+				any_owned_nonprimary_starbase = {
+					is_waystation_starbase = yes
+					solar_system = {
+						any_neighbor_system = {
+							owner? = {
+								is_same_value = root
+							}
+						}
+					}
+				}
+			}
+			desc = NEIGHBORING_WAYSTATIONS
+		}
+		# Common threat bonus
+		modifier = {
+			add = 25
+			any_country = {
+				is_at_war_with = root
+				is_at_war_with = from
+			}
+			desc = COMMON_THREAT
+		}
+		# Reject if rival
+		modifier = {
+			add = -1000
+			is_rival = from
+			desc = RIVALED
+		}
+		# Reject if poor opinion
+		modifier = {
+			add = -50
+			opinion_level = {
+				who = from
+				level <= poor
+			}
+			desc = OPINION_NEGATIVE
+		}
+		# Void Reavers are reluctant to accept formal agreements
+		modifier = {
+			add = -150
+			root = {
+				has_civic = civic_void_reavers
+			}
+			desc = RECIPIENT_IS_VOID_REAVERS
+		}
+	}
+}

@@ -1,0 +1,167 @@
+situation_observation_insight = { # This is a situation used to track your insights
+	picture = GFX_evt_friendly_enlightenment
+	complete_icon_frame = GFX_situation_outcome_frame_green
+	complete_icon = GFX_situation_outcome_positive
+	category = positive
+	situation_log_category = developments
+
+	on_progress_complete = {
+		custom_tooltip = situation_insight_gain
+		hidden_effect = { situation_event = { id = fircon.11 } }
+	}
+
+	stages = {
+		insights = {
+			icon = GFX_situation_stage_pre_ftl
+			icon_background = GFX_situation_stage_frame_green
+			end = 100
+			custom_tooltip = stage_insight_gathering
+		}
+	}
+	monthly_progress = {
+		base = 0
+		modifier = {
+			add = owner.observation_post_insight
+			desc = string_observation_post_insight_gain
+		}
+		modifier = {
+			add = owner.afse_waystation_observation_insight
+			owner = { is_variable_set = afse_waystation_observation_insight }
+			desc = afse_waystation_observation_insight_gain
+		}
+		modifier = {
+			factor = 2
+			owner = { has_ethic = ethic_fanatic_xenophile }
+			desc = string_observation_post_fan_xeno
+		}
+		modifier = {
+			factor = 1.5
+			owner = { has_ethic = ethic_xenophile }
+			desc = string_observation_post_xeno
+		}
+		modifier = {
+			factor = 1.5
+			owner = { has_valid_civic = civic_machine_exploration_protocol }
+			desc = string_observation_post_exploration_protocol
+		}
+		modifier = {
+			factor = 1.25
+			owner = { has_modifier = hands_off_approach }
+			desc = string_observation_post_hands_off
+		}
+		modifier = {
+			factor = 1.25
+			owner = {
+				is_galactic_community_formed = yes
+				is_galactic_community_member = yes
+				is_active_resolution = resolution_pre_ftl_stances_non_interference
+			}
+			desc = string_observation_post_gal_com
+		}
+		modifier = {
+			factor = 1.25
+			current_situation_approach = approach_favor_insights
+			desc = string_current_approach
+		}
+		modifier = {
+			factor = 0.75
+			current_situation_approach = approach_favor_mission
+			desc = string_current_approach
+		}
+	}
+	approach = {
+		name = approach_favor_insights
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			if = {
+				limit = { owner = { is_nomadic = yes } }
+				custom_tooltip = favor_insights_nomad_tt
+			}
+			else = { custom_tooltip = favor_insights_tt }
+			owner = {
+				set_country_flag = favored_insights
+				remove_country_flag = favored_mission
+			}
+		}
+		triggered_modifier = {
+			potential = { owner = { is_nomadic = no } }
+			modifier = { station_observers_produces_mult = -0.5 }
+		}
+	}
+	approach = {
+		name = approach_study_insights
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_yellow
+		on_select = {
+			custom_tooltip = studying_insights_tt
+			owner = {
+				remove_country_flag = favored_insights
+				remove_country_flag = favored_mission
+			}
+		}
+	}
+	approach = {
+		name = approach_favor_mission
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_red
+		on_select = {
+			if = {
+				limit = { owner = { is_nomadic = yes } }
+				custom_tooltip = favor_mission_nomad_tt
+			}
+			else = { custom_tooltip = favor_mission_tt }
+			owner = {
+				remove_country_flag = favored_insights
+				set_country_flag = favored_mission
+			}
+		}
+		triggered_modifier = {
+			potential = { owner = { is_nomadic = no } }
+			modifier = { station_observers_produces_mult = 0.5 }
+		}
+	}
+	abort_trigger = {
+		owner = {
+			NOR = {
+				count_pre_ftl_within_border = {
+					limit = { has_awareness < 100 }
+					count > 0
+				}
+				AND = {
+					is_nomadic = yes
+					any_owned_nonprimary_starbase = {
+						is_waystation_starbase = yes
+						solar_system = {
+							any_system_planet = {
+								has_observation_outpost = no
+								exists = owner
+								owner = {
+									is_primitive = yes
+									has_awareness < 100
+								}
+							}
+						}
+					}
+				}
+				AND = {
+					afse_is_settled_arkship_empire = yes
+					any_owned_nonprimary_starbase = {
+						is_waystation_starbase = yes
+						fleet = { has_fleet_flag = afse_settled_waystation }
+						solar_system = {
+							any_system_planet = {
+								has_observation_outpost = no
+								exists = owner
+								owner = {
+									is_primitive = yes
+									has_awareness < 100
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

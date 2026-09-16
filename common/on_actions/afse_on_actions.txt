@@ -2,13 +2,28 @@ afse_on_arkship_settle = {
 	events = { afse.20 }
 }
 
+afse_on_logistic_drop_off_at_colony = {
+	events = { afse.43 }
+}
+
 on_monthly_pulse_country = {
 	events = {
 		afse.10
+		afse.30
 		afse.31
+		afse.41
+		afse.42
 	}
 }
 
 on_colony_ascension_tier_increased = {
 	events = { afse.11 }
+}
+
+on_enforce_borders = {
+	events = { afse.40 }
+}
+
+on_system_gained = {
+	events = { afse.44 }
 }

@@ -15,3 +15,46 @@ afse_is_settled_arkship_empire = {
 	is_nomadic = no
 	has_ascension_perk = ap_afse_arkship_continuity
 }
+
+# Country scope (pre-FTL country).
+# Extends the vanilla observer check to AFSE Waystations owned by settled empires.
+pre_ftl_in_age_has_nomad_waystation_observer = {
+	is_country_type = primitive
+	has_pre_ftl_age = $AGE$
+	capital_scope = {
+		has_observation_outpost = no
+		solar_system = {
+			any_starbase_in_system = {
+				is_waystation_starbase = yes
+				OR = {
+					owner? = { is_nomadic = yes }
+					AND = {
+						owner? = { afse_is_settled_arkship_empire = yes }
+						fleet = { has_fleet_flag = afse_settled_waystation }
+					}
+				}
+			}
+		}
+	}
+}
+
+# Country scope (pre-FTL country).
+# As above, but without an age requirement.
+pre_ftl_has_nomad_waystation_observer = {
+	is_country_type = primitive
+	capital_scope = {
+		has_observation_outpost = no
+		solar_system = {
+			any_starbase_in_system = {
+				is_waystation_starbase = yes
+				OR = {
+					owner? = { is_nomadic = yes }
+					AND = {
+						owner? = { afse_is_settled_arkship_empire = yes }
+						fleet = { has_fleet_flag = afse_settled_waystation }
+					}
+				}
+			}
+		}
+	}
+}

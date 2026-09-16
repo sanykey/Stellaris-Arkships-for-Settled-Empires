@@ -55,3 +55,14 @@ afse_settled_arkship_empire_size_total = {
 	base = 0
 	add = afse_settled_arkship_empire_size_total
 }
+
+# Country scope: values used by the Settled Waystation construction check.
+afse_waystation_count = {
+	base = 0
+	add = afse_waystation_count
+}
+
+afse_waystation_limit = {
+	base = 0
+	add = afse_waystation_limit
+}
